@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stardew Valley Crop Profitability</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="header-controls">
+    <div class="artisan-container">
+        <span>Artisan</span>
+        <label class="switch">
+            <input type="checkbox" id="artisanToggle">
+            <span class="slider round"></span>
+        </label>
+    </div>
+</div>
+
+<table id="profitTable">
+    <thead>
+        <tr>
+            <th rowspan="2" class="sortable" onclick="sortTable('name')">Crops</th>
+            <th rowspan="1" class="group-header">Base</th>
+            <th colspan="3" class="group-header">Preserved Jar</th>
+            <th colspan="3" class="group-header">Keg</th>
+            <th colspan="3" class="group-header">Dehydrator</th>
+        </tr>
+        <tr class="sub-headers">
+            <th class="sortable" onclick="sortTable('base_price')">售價</th>
+            <th class="sortable" onclick="sortTable('jar_price')">售價</th>
+            <th class="sortable" onclick="sortTable('jar_net')">淨利潤</th>
+            <th class="sortable" onclick="sortTable('jar_daily')">日均利</th>
+            <th class="sortable" onclick="sortTable('keg_price')">售價</th>
+            <th class="sortable" onclick="sortTable('keg_net')">淨利潤</th>
+            <th class="sortable" onclick="sortTable('keg_daily')">日均利</th>
+            <th class="sortable" onclick="sortTable('dehyd_price')">售價</th>
+            <th class="sortable" onclick="sortTable('dehyd_net')">淨利潤</th>
+            <th class="sortable" onclick="sortTable('dehyd_daily')">日均利</th>
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+        </tbody>
+</table>
+
+<script src="script.js"></script>
+</body>
+</html>
