@@ -1,31 +1,25 @@
-/* 字體定義：請確保你有字體檔案，或是透過 CSS 引用 */
-@font-face {
-    font-family: 'NeuzeitGroteskRegular';
-    src: local('Neuzeit Grotesk Regular'), url('fonts/NeuzeitGrotesk-Regular.woff2') format('woff2');
-}
-@font-face {
-    font-family: 'NeuzeitGroteskLight';
-    src: local('Neuzeit Grotesk Light'), url('fonts/NeuzeitGrotesk-Light.woff2') format('woff2');
-}
+/* 1. 從網上連結 Google Sans 字體 (包含 Light 300 和 Regular 400) */
+@import url('https://fonts.cdnfonts.com/css/google-sans');
 
 body {
     background-color: #ffffff;
     padding: 20px;
-    /* 大標題預設字體 */
-    font-family: 'NeuzeitGroteskRegular', sans-serif;
+    /* 大標題及作物名稱預設使用 Regular (400) */
+    font-family: 'Product Sans', 'Google Sans', sans-serif;
+    font-weight: 400;
 }
 
-/* 1. Header 樣式 */
+/* 2. Header 樣式 */
 .site-header {
     text-align: center;
     margin-bottom: 30px;
 }
 .header-img {
-    max-width: 400px;
+    max-width: 450px;
     height: auto;
 }
 
-/* 2. 表格基礎樣式 */
+/* 3. 表格基礎設定 */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -33,45 +27,39 @@ table {
 }
 
 th, td {
-    border: 1px solid #e0e0e0;
-    padding: 12px 8px;
+    border: 1px solid #eeeeee;
+    padding: 12px 6px;
     text-align: center;
 }
 
-/* 作物名稱與大標題 */
-th, .crop-name {
-    font-family: 'NeuzeitGroteskRegular', sans-serif;
-}
+/* 區分 Regular (大標題/名稱) 與 Light (小標題/數字) */
+th, .crop-name { font-weight: 400; }
+td, .sub-headers th { font-weight: 300; }
 
-/* 數字與小標題 */
-td, .sub-headers th {
-    font-family: 'NeuzeitGroteskLight', sans-serif;
-}
+/* 4. 底色設定 (背景顏色) */
+.group-jar, .col-jar, .cell-jar { background-color: #a8b5ac; }
+.group-keg, .col-keg, .cell-keg { background-color: #c2c8d1; } /* 設定為淡淡的灰藍色 */
+.group-dehydrator, .col-dehyd, .cell-dehyd { background-color: #e8d5d5; } /* 設定為淡淡的粉紅色 */
 
-/* 3. 格子底色調整 */
-.group-jar, .col-jar, .cell-jar { background-color: #a8b5ac; } /* Preserved Jar */
-.group-keg, .col-keg, .cell-keg { background-color: #c2c8d1; } /* Keg (建議淡藍色以匹配字體) */
-.group-dehydrator, .col-dehyd, .cell-dehyd { background-color: #e8d5d5; } /* Dehydrator (建議淡紅色) */
+/* 5. 標題字體顏色 (小標題) */
+.col-jar { color: #001a07; }
+.col-keg { color: #05022e; }
+.col-dehyd { color: #1c0101; }
 
-/* 4. 標題字體顏色調整 */
-.group-jar, .col-jar { color: #001a07; }
-.group-keg, .col-keg { color: #05022e; }
-.group-dehydrator, .col-dehyd { color: #1c0101; }
-
-/* 5. 數字字體顏色調整 */
+/* 6. 數字字體顏色 */
 .cell-jar { color: #00260a; }
 .cell-keg { color: #060061; }
 .cell-dehyd { color: #2e0000; }
 
-/* 6. 點擊高光樣式 */
+/* 7. 點擊高亮 (由高至低排序後) */
 .active-sort {
     color: #0000ff !important;
-    font-weight: bold !important;
+    font-weight: 700 !important; /* 加粗 */
 }
 
-/* Switch & Controls */
+/* Artisan Switch */
 .header-controls { display: flex; justify-content: flex-end; margin-bottom: 20px; }
-.artisan-container { display: flex; align-items: center; gap: 10px; font-weight: bold; }
+.artisan-container { display: flex; align-items: center; gap: 10px; font-weight: 400; }
 .switch { position: relative; display: inline-block; width: 46px; height: 22px; }
 .switch input { opacity: 0; width: 0; height: 0; }
 .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
