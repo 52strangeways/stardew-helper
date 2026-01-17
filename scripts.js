@@ -68,7 +68,7 @@ function renderTable(data) {
                 <img src="${row.img}" width="32" style="margin:5px 0;"><br>
                 <small>${row.isMulti ? `⟳${row.regrow}d / ${row.yield}` : `${row.growthDays}d`}</small>
             </td>
-            <td class="${checkActive('base_price')}">${row.basePrice}</td>
+            <td class="cell-base ${checkActive('base_price')}">${row.basePrice}</td>
             
             <td class="cell-jar ${checkActive('jar_price')}">${Math.round(row.jar_price)}</td>
             <td class="cell-jar ${checkActive('jar_net')}">${Math.round(row.jar_net)}</td>
