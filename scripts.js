@@ -125,3 +125,51 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+// ... (之前的 crops 資料與 calculateData 保持不變) ...
+
+function renderTable(data) {
+    const tbody = document.getElementById('tableBody');
+    if (!tbody) return;
+    tbody.innerHTML = data.map(row => `
+        <tr>
+            <td class="crop-name">
+                <strong>${row.name}</strong><br>
+                <img src="${row.img}" width="32" style="margin:5px 0;"><br>
+                <small>${row.isMulti ? `⟳${row.regrow}d / ${row.yield}` : `${row.growthDays}d`}</small>
+            </td>
+            <td>${row.basePrice}</td>
+            <td class="cell-jar">${Math.round(row.jar_price)}</td>
+            <td class="cell-jar">${Math.round(row.jar_net)}</td>
+            <td class="cell-jar" style="font-weight:bold">${row.jar_daily.toFixed(1)}</td>
+            
+            <td class="cell-keg">${Math.round(row.keg_price)}</td>
+            <td class="cell-keg">${Math.round(row.keg_net)}</td>
+            <td class="cell-keg" style="font-weight:bold">${row.keg_daily.toFixed(1)}</td>
+            
+            <td class="cell-dehyd">${row.type === 'fruit' ? Math.round(row.dehyd_price) : '-'}</td>
+            <td class="cell-dehyd">${row.type === 'fruit' ? Math.round(row.dehyd_net) : '-'}</td>
+            <td class="cell-dehyd" style="font-weight:bold">${row.type === 'fruit' ? row.dehyd_daily.toFixed(1) : '-'}</td>
+        </tr>
+    `).join('');
+}
+
+function sortTable(key) {
+    // 移除所有舊的高光
+    document.querySelectorAll('.sortable').forEach(el => el.classList.remove('active-sort'));
+    // 為當前點擊的標題加上高光
+    document.getElementById(`sort-${key}`).classList.add('active-sort');
+
+    const data = calculateData();
+    data.sort((a, b) => (key === 'name' ? a.name.localeCompare(b.name) : b[key] - a[key]));
+    renderTable(data);
+}
+
+// 初始化
+document.addEventListener('DOMContentLoaded', () => {
+    sortTable('jar_daily'); // 預設依日均利排序
+    document.getElementById('artisanToggle').addEventListener('change', (e) => {
+        isArtisan = e.target.checked;
+        const currentSort = document.querySelector('.active-sort').id.replace('sort-', '');
+        sortTable(currentSort);
+    });
+});
