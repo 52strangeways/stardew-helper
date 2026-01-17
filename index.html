@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stardew Valley 盈利計算器</title>
+    <title>Stardew helper</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<div class="site-header">
+    <img src="header.png" alt="Stardew helper" class="header-img">
+</div>
+
 <div class="header-controls">
     <div class="artisan-container">
-        <span>Artisan (+40%)</span>
+        <span>Artisan</span>
         <label class="switch">
             <input type="checkbox" id="artisanToggle">
             <span class="slider round"></span>
@@ -21,28 +25,29 @@
 <table id="profitTable">
     <thead>
         <tr>
-            <th rowspan="2" class="sortable" onclick="sortTable('name')">Crops</th>
-            <th rowspan="2" class="sortable" onclick="sortTable('base_price')">Base</th>
-            <th colspan="3" class="group-header">Preserved Jar</th>
-            <th colspan="3" class="group-header">Keg</th>
-            <th colspan="3" class="group-header">Dehydrator</th>
+            <th rowspan="2" class="sortable" id="sort-name" onclick="sortTable('name')">Crops</th>
+            <th rowspan="2" class="sortable" id="sort-base_price" onclick="sortTable('base_price')">Base</th>
+            <th colspan="3" class="group-jar">Preserved Jar</th>
+            <th colspan="3" class="group-keg">Keg</th>
+            <th colspan="3" class="group-dehydrator">Dehydrator</th>
         </tr>
         <tr class="sub-headers">
-            <th class="sortable" onclick="sortTable('jar_price')">售價</th>
-            <th class="sortable" onclick="sortTable('jar_net')">淨利</th>
-            <th class="sortable" onclick="sortTable('jar_daily')">日均</th>
-            <th class="sortable" onclick="sortTable('keg_price')">售價</th>
-            <th class="sortable" onclick="sortTable('keg_net')">淨利</th>
-            <th class="sortable" onclick="sortTable('keg_daily')">日均</th>
-            <th class="sortable" onclick="sortTable('dehyd_price')">售價</th>
-            <th class="sortable" onclick="sortTable('dehyd_net')">淨利</th>
-            <th class="sortable" onclick="sortTable('dehyd_daily')">日均</th>
+            <th class="sortable col-jar" id="sort-jar_price" onclick="sortTable('jar_price')">售價</th>
+            <th class="sortable col-jar" id="sort-jar_net" onclick="sortTable('jar_net')">淨利潤</th>
+            <th class="sortable col-jar" id="sort-jar_daily" onclick="sortTable('jar_daily')">日均利</th>
+            
+            <th class="sortable col-keg" id="sort-keg_price" onclick="sortTable('keg_price')">售價</th>
+            <th class="sortable col-keg" id="sort-keg_net" onclick="sortTable('keg_net')">淨利潤</th>
+            <th class="sortable col-keg" id="sort-keg_daily" onclick="sortTable('keg_daily')">日均利</th>
+            
+            <th class="sortable col-dehyd" id="sort-dehyd_price" onclick="sortTable('dehyd_price')">售價</th>
+            <th class="sortable col-dehyd" id="sort-dehyd_net" onclick="sortTable('dehyd_net')">淨利潤</th>
+            <th class="sortable col-dehyd" id="sort-dehyd_daily" onclick="sortTable('dehyd_daily')">日均利</th>
         </tr>
     </thead>
-    <tbody id="tableBody">
-        </tbody>
+    <tbody id="tableBody"></tbody>
 </table>
 
-<script src="scripts.js"></script> 
+<script src="scripts.js"></script>
 </body>
 </html>
