@@ -1,12 +1,22 @@
 /* 1. 從網上連結 Google Sans 字體 (包含 Light 300 和 Regular 400) */
 @import url('https://fonts.cdnfonts.com/css/google-sans');
 
+/* 調整 body 確保沒有左右死角 */
 body {
     background-color: #ffffff;
-    padding: 20px;
-    /* 大標題及作物名稱預設使用 Regular (400) */
-    font-family: 'Product Sans', 'Google Sans', sans-serif;
-    font-weight: 400;
+    padding: 20px;        /* 留一點點邊距，如果想要完全貼邊可設為 0 */
+    margin: 0;
+    width: 100%;          /* 強制 body 寬度為 100% */
+    box-sizing: border-box; /* 確保 padding 不會撐破寬度 */
+    font-family: 'NeuzeitGroteskRegular', sans-serif;
+}
+
+/* 確保表格橫向填滿 */
+table {
+    width: 100%;
+    table-layout: auto;   /* 讓瀏覽器根據內容自動分配欄位寬度 */
+    border-collapse: collapse;
+    margin-top: 10px;
 }
 
 /* 2. Header 樣式 */
@@ -14,9 +24,13 @@ body {
     text-align: center;
     margin-bottom: 30px;
 }
+/* 修改 .header-img 區塊 */
 .header-img {
-    max-width: 450px;
-    height: auto;
+    width: 100%;        /* 隨容器寬度縮放 */
+    max-width: 500px;   /* 最大放大到 500px (400px + 25%) */
+    height: auto;       /* 保持比例 */
+    display: block;
+    margin: 0 auto;     /* 居中 */
 }
 
 /* 3. 表格基礎設定 */
@@ -36,10 +50,19 @@ th, td {
 th, .crop-name { font-weight: 400; }
 td, .sub-headers th { font-weight: 300; }
 
+
+/* 修改數字的大小 */
+td {
+    font-size: 12px;
+}
+
 /* 4. 底色設定 (背景顏色) */
-.group-jar, .col-jar, .cell-jar { background-color: #a8b5ac; }
-.group-keg, .col-keg, .cell-keg { background-color: #c2c8d1; } /* 設定為淡淡的灰藍色 */
-.group-dehydrator, .col-dehyd, .cell-dehyd { background-color: #e8d5d5; } /* 設定為淡淡的粉紅色 */
+.group-jar, .col-jar { background-color: #a8b5ac; }
+.cell-jar { background-color: #e4f0e4; }
+.group-keg, .col-keg { background-color: #c2c8d1; } /* 設定為淡淡的灰藍色 */
+.cell-keg { background-color: #e4e4f0; }
+.group-dehydrator, .col-dehyd { background-color: #e8d5d5; } /* 設定為淡淡的粉紅色 */
+.cell-dehyd { background-color: #f0e4e4; }
 
 /* 5. 標題字體顏色 (小標題) */
 .col-jar { color: #001a07; }
@@ -51,11 +74,19 @@ td, .sub-headers th { font-weight: 300; }
 .cell-keg { color: #060061; }
 .cell-dehyd { color: #2e0000; }
 
-/* 7. 點擊高亮 (由高至低排序後) */
-.active-sort {
+/* 7. 點擊排序後的整欄高光樣式 */
+.active-column {
     color: #0000ff !important;
-    font-weight: 700 !important; /* 加粗 */
+    font-weight: bold !important;
+    /* 這裡可以選擇是否要加一個淡淡的底色，讓整欄更顯眼 */
+    background-color: rgba(0, 0, 255, 0.05) !important; 
 }
+
+/* 確保原本的售價、淨利顏色在 active 時被覆蓋 */
+td.active-column {
+    color: #0000ff !important;
+}
+
 
 /* Artisan Switch */
 .header-controls { display: flex; justify-content: flex-end; margin-bottom: 20px; }
