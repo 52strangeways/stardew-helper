@@ -1,13 +1,80 @@
-body { font-family: sans-serif; padding: 10px; }
-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-th, td { border: 1px solid #ddd; padding: 6px; text-align: center; font-size: 13px; }
-th { background: #f4f4f4; cursor: pointer; }
-.group-header { background: #eee; font-weight: bold; }
-.profit { color: blue; font-weight: bold; }
-.header-controls { display: flex; justify-content: flex-end; padding: 10px; }
-.switch { position: relative; display: inline-block; width: 40px; height: 20px; margin-left: 10px; }
-.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: #ccc; border-radius: 20px; transition: .4s; }
-.slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: .4s; }
-input:checked + .slider { background: #4caf50; }
-input:checked + .slider:before { transform: translateX(20px); }
-input { opacity: 0; width: 0; height: 0; }
+/* 字體定義：請確保你有字體檔案，或是透過 CSS 引用 */
+@font-face {
+    font-family: 'NeuzeitGroteskRegular';
+    src: local('Neuzeit Grotesk Regular'), url('fonts/NeuzeitGrotesk-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'NeuzeitGroteskLight';
+    src: local('Neuzeit Grotesk Light'), url('fonts/NeuzeitGrotesk-Light.woff2') format('woff2');
+}
+
+body {
+    background-color: #ffffff;
+    padding: 20px;
+    /* 大標題預設字體 */
+    font-family: 'NeuzeitGroteskRegular', sans-serif;
+}
+
+/* 1. Header 樣式 */
+.site-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.header-img {
+    max-width: 400px;
+    height: auto;
+}
+
+/* 2. 表格基礎樣式 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid #e0e0e0;
+    padding: 12px 8px;
+    text-align: center;
+}
+
+/* 作物名稱與大標題 */
+th, .crop-name {
+    font-family: 'NeuzeitGroteskRegular', sans-serif;
+}
+
+/* 數字與小標題 */
+td, .sub-headers th {
+    font-family: 'NeuzeitGroteskLight', sans-serif;
+}
+
+/* 3. 格子底色調整 */
+.group-jar, .col-jar, .cell-jar { background-color: #a8b5ac; } /* Preserved Jar */
+.group-keg, .col-keg, .cell-keg { background-color: #c2c8d1; } /* Keg (建議淡藍色以匹配字體) */
+.group-dehydrator, .col-dehyd, .cell-dehyd { background-color: #e8d5d5; } /* Dehydrator (建議淡紅色) */
+
+/* 4. 標題字體顏色調整 */
+.group-jar, .col-jar { color: #001a07; }
+.group-keg, .col-keg { color: #05022e; }
+.group-dehydrator, .col-dehyd { color: #1c0101; }
+
+/* 5. 數字字體顏色調整 */
+.cell-jar { color: #00260a; }
+.cell-keg { color: #060061; }
+.cell-dehyd { color: #2e0000; }
+
+/* 6. 點擊高光樣式 */
+.active-sort {
+    color: #0000ff !important;
+    font-weight: bold !important;
+}
+
+/* Switch & Controls */
+.header-controls { display: flex; justify-content: flex-end; margin-bottom: 20px; }
+.artisan-container { display: flex; align-items: center; gap: 10px; font-weight: bold; }
+.switch { position: relative; display: inline-block; width: 46px; height: 22px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
+.slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+input:checked + .slider { background-color: #4caf50; }
+input:checked + .slider:before { transform: translateX(24px); }
