@@ -47,13 +47,74 @@ th, td {
 }
 
 /* 區分 Regular (大標題/名稱) 與 Light (小標題/數字) */
-th, .crop-name { font-weight: 400; }
-td, .sub-headers th { font-weight: 300; }
+th, .crop-name { font-weight: 500;
+                 font-size: 12px; }
+td, .sub-headers th { font-weight: 400; }
+
+
+/* 選取表格標題的第一列 */
+thead tr:first-child th {
+    font-size: 15px; /* 讓 Keg 等字體稍微大一點 */
+    vertical-align: middle;
+}
+
+
+/* 針對 Keg 的大標題格子 */
+.group-keg {
+    background-color: #c2c8d1; /* 這是你設定的 Keg 底色 */
+    color: #05022e;           /* 這是你設定的 Keg 標題字體顏色 */
+}
+
+/* 針對 Preserved Jar 的大標題格子 */
+.group-jar {
+    background-color: #a8b5ac;
+    color: #001a07;
+}
+
+/* 針對 Dehydrator 的大標題格子 */
+.group-dehydrator {
+    background-color: #e8d5d5;
+    color: #1c0101;
+}
+
 
 
 /* 修改數字的大小 */
 td {
     font-size: 12px;
+    font-weight: 400;
+}
+
+/* 針對表格中的所有格子 */
+th, td {
+    /* 10px: 絕對最小值，再小就不會縮了
+       1.1vw: 首選大小，隨著瀏覽器寬度每 1% 變動
+       14px: 絕對最大值，避免在大螢幕上字體大得突兀
+    */
+    font-size: clamp(6px, 1.1vw, 10px);
+    
+    /* 關鍵：防止字體縮小時因為空間不足而強行換行 */
+    white-space: nowrap; 
+    
+    /* 讓縮放過程平滑一點 */
+    transition: font-size 0.2s ease; 
+}
+
+/* 針對作物名稱，可以稍微設大一點點 */
+.crop-name strong {
+    font-size: clamp(9px, 1.3vw, 13px);
+}
+
+.crop-name img {
+    width: clamp(16px, 2.5vw, 20px); /* 圖片也會隨網頁變小 */
+    height: auto;
+}
+
+/* 針對手機版的微調 */
+@media (max-width: 600px) {
+    th, td {
+        padding: 8px 4px; /* 手機版縮小間距，給字體留空間 */
+    }
 }
 
 /* 4. 底色設定 (背景顏色) */
@@ -63,6 +124,25 @@ td {
 .cell-keg { background-color: #e4e4f0; }
 .group-dehydrator, .col-dehyd { background-color: #e8d5d5; } /* 設定為淡淡的粉紅色 */
 .cell-dehyd { background-color: #f0e4e4; }
+
+/* Base 標題格子的顏色設定 */
+.group-base {
+    background-color: #f5f5f5; /* 建議用一個淺灰色或白色作為基礎 */
+    color: #333333;           /* 標題字體顏色 */
+}
+
+/* Base 數據格子的顏色設定 */
+.cell-base {
+    background-color: #f5f5f5; /* 數據格底色 */
+    color: #333333;           /* 數字字體顏色 */
+}
+
+/* 當 Base 被點擊排序時的高光 (會覆蓋上面的顏色) */
+.cell-base.active-column {
+    color: #0000ff !important;
+    font-weight: bold !important;
+}
+
 
 /* 5. 標題字體顏色 (小標題) */
 .col-jar { color: #001a07; }
