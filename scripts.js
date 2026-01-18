@@ -53,31 +53,32 @@ function calculateData() {
 // 在腳本最上方定義一個變數來追蹤目前的排序鍵值
 let currentSortKey = 'jar_daily'; 
 
+// 修改後的 renderTable 片段
 function renderTable(data) {
     const tbody = document.getElementById('tableBody');
     if (!tbody) return;
 
     tbody.innerHTML = data.map(row => {
-        // 定義一個小工具函式來判斷是否該套用高光 Class
         const checkActive = (key) => currentSortKey === key ? 'active-column' : '';
 
         return `
         <tr>
-            <td class="crop-name ${checkActive('name')}">
-                <strong>${row.name}</strong><br>
-                <img src="${row.img}" width="32" style="margin:5px 0;"><br>
-                <small>${row.isMulti ? `⟳${row.regrow}d / ${row.yield}` : `${row.growthDays}d`}</small>
+            <td class="crop-name-cell ${checkActive('name')}">
+                <div class="crop-content-wrapper">
+                    <img src="${row.img}" class="crop-icon">
+                    <div class="crop-info-text">
+                        <strong class="crop-title">${row.name}</strong>
+                        <small class="crop-time">${row.isMulti ? `⟳${row.regrow}d / ${row.yield}` : `${row.growthDays}d`}</small>
+                    </div>
+                </div>
             </td>
-            <td class="cell-base ${checkActive('base_price')}">${row.basePrice}</td>
-            
+            <td class="${checkActive('base_price')}">${row.basePrice}</td>
             <td class="cell-jar ${checkActive('jar_price')}">${Math.round(row.jar_price)}</td>
             <td class="cell-jar ${checkActive('jar_net')}">${Math.round(row.jar_net)}</td>
             <td class="cell-jar ${checkActive('jar_daily')}">${row.jar_daily.toFixed(1)}</td>
-            
             <td class="cell-keg ${checkActive('keg_price')}">${Math.round(row.keg_price)}</td>
             <td class="cell-keg ${checkActive('keg_net')}">${Math.round(row.keg_net)}</td>
             <td class="cell-keg ${checkActive('keg_daily')}">${row.keg_daily.toFixed(1)}</td>
-            
             <td class="cell-dehyd ${checkActive('dehyd_price')}">${row.type === 'fruit' ? Math.round(row.dehyd_price) : '-'}</td>
             <td class="cell-dehyd ${checkActive('dehyd_net')}">${row.type === 'fruit' ? Math.round(row.dehyd_net) : '-'}</td>
             <td class="cell-dehyd ${checkActive('dehyd_daily')}">${row.type === 'fruit' ? row.dehyd_daily.toFixed(1) : '-'}</td>
@@ -85,6 +86,7 @@ function renderTable(data) {
         `;
     }).join('');
 }
+
 
 function sortTable(key) {
     // 1. 更新全域變數
