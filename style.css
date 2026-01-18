@@ -48,8 +48,10 @@ th, td {
 
 /* 區分 Regular (大標題/名稱) 與 Light (小標題/數字) */
 th, .crop-name { font-weight: 500;
-                 font-size: 12px; }
-td, .sub-headers th { font-weight: 400; }
+                 font-size: 13px; }
+td, .sub-headers th { font-weight: 400;
+                     font-size: 11px;
+                    }
 
 /* 針對生長天數（小字）的字體 */
 .crop-name small {
@@ -87,7 +89,7 @@ thead tr:first-child th {
 /* 修改數字的大小 */
 td {
     font-size: 13px;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 /* 針對表格中的所有格子 */
@@ -96,18 +98,13 @@ th, td {
        1.1vw: 首選大小，隨著瀏覽器寬度每 1% 變動
        14px: 絕對最大值，避免在大螢幕上字體大得突兀
     */
-    font-size: clamp(7px, 1.1vw, 14px);
+    font-size: clamp(13px, 1.1vw, 17px);
     
     /* 關鍵：防止字體縮小時因為空間不足而強行換行 */
     white-space: nowrap; 
     
     /* 讓縮放過程平滑一點 */
     transition: font-size 0.2s ease; 
-}
-
-/* 針對作物名稱，可以稍微設大一點點 */
-.crop-name strong {
-    font-size: clamp(11px, 1.3vw, 15px);
 }
 
 .crop-name img {
@@ -123,12 +120,12 @@ th, td {
 }
 
 /* 4. 底色設定 (背景顏色) */
-.group-jar, .col-jar { background-color: #a8b5ac; }
-.cell-jar { background-color: #e4f0e4; }
-.group-keg, .col-keg { background-color: #c2c8d1; } /* 設定為淡淡的灰藍色 */
-.cell-keg { background-color: #e4e4f0; }
-.group-dehydrator, .col-dehyd { background-color: #e8d5d5; } /* 設定為淡淡的粉紅色 */
-.cell-dehyd { background-color: #f0e4e4; }
+.group-jar, .col-jar { background-color: #bec9bd; }
+.cell-jar { background-color: #e9f0e9; }
+.group-keg, .col-keg { background-color: #bdbec9; } /* 設定為淡淡的灰藍色 */
+.cell-keg { background-color: #e9eaf0; }
+.group-dehydrator, .col-dehyd { background-color: #c9bdbd; } /* 設定為淡淡的粉紅色 */
+.cell-dehyd { background-color: #f0e9e9; }
 
 /* Base 標題格子的顏色設定 */
 .group-base {
