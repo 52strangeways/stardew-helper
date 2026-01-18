@@ -8,7 +8,7 @@ body {
     margin: 0;
     width: 100%;          /* 強制 body 寬度為 100% */
     box-sizing: border-box; /* 確保 padding 不會撐破寬度 */
-    font-family: 'NeuzeitGroteskRegular', sans-serif;
+    font-family: google-sans;
 }
 
 /* 確保表格橫向填滿 */
@@ -54,7 +54,7 @@ td, .sub-headers th { font-weight: 400; }
 
 /* 選取表格標題的第一列 */
 thead tr:first-child th {
-    font-size: 15px; /* 讓 Keg 等字體稍微大一點 */
+    font-size: 13px; /* 讓 Keg 等字體稍微大一點 */
     vertical-align: middle;
 }
 
@@ -78,10 +78,9 @@ thead tr:first-child th {
 }
 
 
-
 /* 修改數字的大小 */
 td {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 400;
 }
 
@@ -91,7 +90,7 @@ th, td {
        1.1vw: 首選大小，隨著瀏覽器寬度每 1% 變動
        14px: 絕對最大值，避免在大螢幕上字體大得突兀
     */
-    font-size: clamp(6px, 1.1vw, 10px);
+    font-size: clamp(7px, 1.1vw, 14px);
     
     /* 關鍵：防止字體縮小時因為空間不足而強行換行 */
     white-space: nowrap; 
@@ -102,7 +101,7 @@ th, td {
 
 /* 針對作物名稱，可以稍微設大一點點 */
 .crop-name strong {
-    font-size: clamp(9px, 1.3vw, 13px);
+    font-size: clamp(11px, 1.3vw, 15px);
 }
 
 .crop-name img {
