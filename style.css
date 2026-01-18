@@ -51,6 +51,12 @@ th, .crop-name { font-weight: 500;
                  font-size: 12px; }
 td, .sub-headers th { font-weight: 400; }
 
+/* 針對生長天數（小字）的字體 */
+.crop-name small {
+    font-family: 'NeuzeitGroteskLight', sans-serif;
+    font-size: 8px;
+    color: #666666;
+}
 
 /* 選取表格標題的第一列 */
 thead tr:first-child th {
