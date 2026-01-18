@@ -42,7 +42,7 @@ table {
 
 th, td {
     border: 1px solid #eeeeee;
-    padding: 12px 6px;
+    padding: 12px 12px;
     text-align: center;
 }
 
@@ -60,7 +60,7 @@ td, .sub-headers th { font-weight: 400; }
 
 /* 選取表格標題的第一列 */
 thead tr:first-child th {
-    font-size: 13px; /* 讓 Keg 等字體稍微大一點 */
+    font-size: 12px; /* 讓 Keg 等字體稍微大一點 */
     vertical-align: middle;
 }
 
@@ -170,6 +170,48 @@ th, td {
 /* 確保原本的售價、淨利顏色在 active 時被覆蓋 */
 td.active-column {
     color: #0000ff !important;
+}
+
+/* 1. 作物格子的容器：設定為橫向排列並垂直置中 */
+.crop-content-wrapper {
+    display: flex;
+    align-items: center;      /* 垂直居中 */
+    gap: 12px;               /* 圖片與文字之間的距離 */
+    padding-left: 8px;       /* 稍微往右移一點，不貼邊 */
+    text-align: left;        /* 確保文字靠左對齊 */
+}
+
+/* 2. 圖示樣式 */
+.crop-icon {
+    width: clamp(28px, 2.5vw, 36px); /* 隨寬度縮放 */
+    height: auto;
+    image-rendering: pixelated;     /* 保持像素風清晰度 */
+    flex-shrink: 0;                 /* 確保圖片不會被擠壓變形 */
+}
+
+/* 3. 文字容器：讓名稱與時間上下堆疊 */
+.crop-info-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* 4. 名稱與時間的字體調整 */
+.crop-title {
+    font-family: 'NeuzeitGroteskRegular', sans-serif;
+    line-height: 1.2;
+    margin-bottom: 2px;
+}
+
+.crop-time {
+    font-family: 'NeuzeitGroteskLight', sans-serif;
+    color: #666;
+    font-size: 0.85em;
+}
+
+/* 調整格子寬度以適應橫向排版 */
+.crop-name-cell {
+    min-width: 140px; /* 增加最小寬度，避免文字換行 */
 }
 
 
