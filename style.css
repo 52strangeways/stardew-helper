@@ -48,7 +48,7 @@ th, td {
 
 /* 區分 Regular (大標題/名稱) 與 Light (小標題/數字) */
 th, .crop-name { font-weight: 500;
-                 font-size: 13px; }
+                 font-size: 12px; }
 td, .sub-headers th { font-weight: 400;
                      font-size: 11px;
                     }
@@ -88,7 +88,7 @@ thead tr:first-child th {
 
 /* 修改數字的大小 */
 td {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
 }
 
@@ -98,7 +98,7 @@ th, td {
        1.1vw: 首選大小，隨著瀏覽器寬度每 1% 變動
        14px: 絕對最大值，避免在大螢幕上字體大得突兀
     */
-    font-size: clamp(13px, 1.1vw, 17px);
+    font-size: clamp(10px, 1.1vw, 14px);
     
     /* 關鍵：防止字體縮小時因為空間不足而強行換行 */
     white-space: nowrap; 
@@ -108,7 +108,7 @@ th, td {
 }
 
 .crop-name img {
-    width: clamp(16px, 2.5vw, 20px); /* 圖片也會隨網頁變小 */
+    width: clamp(14px, 2.5vw, 20px); /* 圖片也會隨網頁變小 */
     height: auto;
 }
 
