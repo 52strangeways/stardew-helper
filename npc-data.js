@@ -99,7 +99,7 @@ function renderCalendars() {
     if (!container) return; // 如果找不到容器就不執行
 
     const seasons = ['Spring', 'Summer', 'Fall', 'Winter'];
-    const seasonNamesZh = { Spring: '🌸 春季 (Spring)', Summer: '🌞 夏季 (Summer)', Fall: '🍁 秋季 (Fall)', Winter: '⛄️ 冬季 (Winter)' };
+    const seasonNamesZh = { Spring: '🌸 SPRING', Summer: '🌞 SUMMER', Fall: '🍁 FALL', Winter: '⛄️ WINTER' };
 
     // 遍歷四個季節，生成 HTML
     container.innerHTML = seasons.map(season => {
