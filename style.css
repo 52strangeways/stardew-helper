@@ -369,7 +369,7 @@ input:checked + .slider:before { transform: translateX(24px); }
     justify-content: center; /* 從頂部開始排列 */
     font-family: 'NeuzeitGroteskLight', sans-serif;
     padding: 2px;
-    font-size: 12px;
+    font-size: 13px;
     color: #3a5557;
     position: relative;
     overflow: hidden;
@@ -392,12 +392,13 @@ input:checked + .slider:before { transform: translateX(24px); }
     position: absolute;
     top: 4px;
     left: 4px;
-    font-size: 10px;
+    font-size: 11px;
     line-height:1 ;
     align-self: flex-start; /* 日期數字靠左上角 */
     margin-bottom: 2px;
     color: #020e54;
     opacity: 0.7;
+    z-index: 10;
 }
 
 /* 月曆內的名字樣式 */
