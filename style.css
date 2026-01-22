@@ -1,5 +1,18 @@
 /* 1. 從網上連結 Google Sans 字體 (包含 Light 300 和 Regular 400) */
-@import url('https://fonts.cdnfonts.com/css/google-sans');
+@import url('https://fonts.cdnfonts.com/css/neuzeit-grotesk');
+
+/* 2. 建立別名，確保你原本寫的 NeuzeitGroteskRegular 能對應到正確的字體 */
+@font-face {
+    font-family: 'NeuzeitGroteskRegular';
+    src: local('Neuzeit Grotesk'), url('https://fonts.cdnfonts.com/css/neuzeit-grotesk') format('woff2');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'NeuzeitGroteskLight';
+    src: local('Neuzeit Grotesk Light'), url('https://fonts.cdnfonts.com/css/neuzeit-grotesk') format('woff2');
+    font-weight: 300;
+}
 
 /* 調整 body 確保沒有左右死角 */
 body {
