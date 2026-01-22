@@ -115,15 +115,16 @@ function renderCalendars() {
             
             let content = i; // 預設顯示日期數字
 
-            if (bdayNPC) {
-                // 如果有壽星，顯示可點擊的頭像
-                // 注意這裡的 onclick 直接呼叫了現有的 showNPCDetail 函式
-                content = `<img src="${bdayNPC.portrait}" class="calendar-portrait" onclick="showNPCDetail('${bdayNPC.name}')" title="${bdayNPC.name} 生日">`;
-            }
+if (bdayNPC) {
+    // 將頭像與名字包在一起，並把點擊事件移至外層容器
+    content = `
+        <div class="calendar-npc-item" onclick="showNPCDetail('${bdayNPC.name}')">
+            <img src="${bdayNPC.portrait}" class="calendar-portrait">
+            <div class="calendar-npc-name">${bdayNPC.name}</div>
+        </div>
+    `;
+}
             
-            daysHTML += `<div class="calendar-day">${content}</div>`;
-        }
-
         // 3. 回傳整個季節區塊的 HTML
         return `
             <div class="calendar-block">
