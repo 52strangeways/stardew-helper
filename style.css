@@ -357,29 +357,37 @@ input:checked + .slider:before { transform: translateX(24px); }
 .calendar-day {
     background-color: #c2cacc; /* 格子內部顏色較亮 */
     aspect-ratio: 1 / 1; /* 保持正方形 */
+    width: 100%;
     display: flex;
-    flex-direction: column; /* 改為垂直排列 */
     align-items: center;
-    justify-content: flex-start; /* 從頂部開始排列 */
+    justify-content: center; /* 從頂部開始排列 */
     font-family: 'NeuzeitGroteskLight', sans-serif;
     padding: 2px;
     font-size: 12px;
     color: #3a5557;
     position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
 /* 月曆中的頭像 */
 .calendar-portrait {
-    width: 70%;
+    width: 60% !important;
+    max-width: 30px;
     height: auto;
     object-fit: contain;
+    display: block;
     image-rendering: pixelated;
     cursor: pointer; /* 讓游標變手指 */
     transition: transform 0.1s;
 }
 
 .day-number {
+    position: absolute;
+    top: 4px;
+    left: 4px;
     font-size: 10px;
+    line-height:1 ;
     align-self: flex-start; /* 日期數字靠左上角 */
     margin-bottom: 2px;
     opacity: 0.7;
@@ -398,6 +406,16 @@ input:checked + .slider:before { transform: translateX(24px); }
     flex-direction: column;
     align-items: center;
     width: 100%;
+}
+
+.calendar-npc-item {
+    display: flex;
+    flex-direction: column;  /* 讓圖片與文字上下排列 */
+    align-items: center;     /* 水平居中圖片與文字 */
+    justify-content: center; /* 垂直居中圖片與文字 */
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
 }
 
 .calendar-portrait:hover {
