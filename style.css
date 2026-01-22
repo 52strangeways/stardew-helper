@@ -594,6 +594,25 @@ input:checked + .slider:before { transform: translateX(24px); }
         opacity: 0.7;
         margin: 0;
     }
+    
+    /* 在這裡修改 NPC 名字的字體大小 */
+    .npc-name {
+        font-size: 11px;
+        text-align: center;
+        margin-top: 5px;
+    }
+
+    /* NPC 卡片上的生日文字 */
+    .npc-birthday {
+        font-family: 'NeuzeitGroteskLight', sans-serif;
+        font-size: 8px;      /* 生日通常比名字小，設定為 10px 較為精緻 */
+        margin-top: 3px;      /* 讓生日跟名字靠得近一點 */
+        display: block;       /* 確保它會換行顯示在名字下方 */
+    }
+
+    .npc-grid {
+        gap: 8px;
+
 }
 
 
