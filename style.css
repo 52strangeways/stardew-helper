@@ -634,7 +634,6 @@ input:checked + .slider:before { transform: translateX(24px); }
 
     /* NPC 卡片上的生日文字 */
     .npc-birthday {
-        font-family: 'NeuzeitGroteskLight', sans-serif;
         font-size: 7px;      /* 生日通常比名字小，設定為 10px 較為精緻 */
         margin-top: 3px;      /* 讓生日跟名字靠得近一點 */
         display: block;       /* 確保它會換行顯示在名字下方 */
