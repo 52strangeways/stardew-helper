@@ -584,15 +584,15 @@ input:checked + .slider:before { transform: translateX(24px); }
     /* 當 .calendar-day 裡面沒有 NPC 項目時 */
     .calendar-day:not(:has(.calendar-npc-item)) .day-number {
         position: static;     /* 取消原本的絕對定位 (左上角) */
-        font-size: 20px;      /* 放大數字 */
+        font-size: 15px;      /* 放大數字 */
         font-weight: bold;
-        width: 80%;
-        height: 80%;
+        width: 70%;
+        height: 70%;
         display: flex;
         align-items: center;
         justify-content: center;
         color: #3a5557;
-        opacity: 0.9;
+        opacity: 0.7;
     }
 }
 
