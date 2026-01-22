@@ -94,27 +94,46 @@ function filterNPCs() {
 // ... (保留最上面的 npcList 資料陣列) ...
 
 // --- 新增：渲染 2x2 四季月曆的函式 ---
-function renderCalendars() {
+    //
+    function renderCalendars() {
     const container = document.getElementById('calendarGrid');
-    if (!container) return; // 如果找不到容器就不執行
+    if (!container) return; // 預防找不到容器導致崩潰
 
     const seasons = ['Spring', 'Summer', 'Fall', 'Winter'];
-    const seasonNamesZh = { Spring: '🌸 SPRING', Summer: '🌞 SUMMER', Fall: '🍁 FALL', Winter: '⛄️ WINTER' };
+    const seasonNamesZh = { Spring: '🌸 Spring', Summer: '🌞 Summer', Fall: '🍁 Fall', Winter: '⛄️ Winter' };
 
-    // 遍歷四個季節，生成 HTML
     container.innerHTML = seasons.map(season => {
-        // 1. 篩選出這個季節生日的所有 NPC
         const seasonNPCs = npcList.filter(npc => npc.birthday.startsWith(season));
+        let daysHTML = ''; // 確保變數名稱統一
 
-        let daysHTML = '';
-        // 2. 生成 1 到 28 天的格子
         for (let i = 1; i <= 28; i++) {
-            // 檢查這一天是否有 NPC 生日
-            // (比對格式例如 "Spring 14")
             const bdayNPC = seasonNPCs.find(npc => npc.birthday === `${season} ${i}`);
             
-            let content = i; // 預設顯示日期數字
+            // 預設內容：僅顯示日期數字
+            let content = `<span class="day-number">${i}</span>`;
 
+            if (bdayNPC) {
+                // 修改處：加入名字並包裝容器
+                content = `
+                    <div class="calendar-npc-item" onclick="showNPCDetail('${bdayNPC.name}')">
+                        <img src="${bdayNPC.portrait}" class="calendar-portrait">
+                        <div class="calendar-npc-name">${bdayNPC.name}</div>
+                    </div>
+                `;
+            }
+            daysHTML += `<div class="calendar-day">${content}</div>`;
+        }
+
+        return `
+            <div class="calendar-block">
+                <h3 class="calendar-title">${seasonNamesZh[season]}</h3>
+                <div class="calendar-days-grid">${daysHTML}</div>
+            </div>
+        `;
+}
+
+
+            
 if (bdayNPC) {
     // 將頭像與名字包在一起，並把點擊事件移至外層容器
     content = `
