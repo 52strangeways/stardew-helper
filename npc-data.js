@@ -94,8 +94,8 @@ function filterNPCs() {
 // ... (保留最上面的 npcList 資料陣列) ...
 
 // --- 新增：渲染 2x2 四季月曆的函式 ---
-    //
-    function renderCalendars() {
+
+function renderCalendars() {
     const container = document.getElementById('calendarGrid');
     if (!container) return; // 預防找不到容器導致崩潰
 
@@ -113,7 +113,7 @@ function filterNPCs() {
             let content = `<span class="day-number">${i}</span>`;
 
             if (bdayNPC) {
-                // 修改處：加入名字並包裝容器
+                // 加入名字並包裝容器
                 content = `
                     <div class="calendar-npc-item" onclick="showNPCDetail('${bdayNPC.name}')">
                         <img src="${bdayNPC.portrait}" class="calendar-portrait">
@@ -130,7 +130,9 @@ function filterNPCs() {
                 <div class="calendar-days-grid">${daysHTML}</div>
             </div>
         `;
+    }).join(''); // <--- 這裡原本漏掉了 }).join('');
 }
+
 
 
             
