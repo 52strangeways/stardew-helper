@@ -38,27 +38,30 @@ const npcList = [
     { name: "Leo", portrait: "https://stardewvalleywiki.com/mediawiki/images/1/1d/Leo.png", birthday: "Summer 26", loved: ["Duck Feather", "Mango", "Ostrich Egg", "Poi"], birthdaySchedule: ["09:00 AM - 薑島樹屋內", "12:00 PM - 薑島沙灘", "06:00 PM - 回到樹屋"] }
 ];
 
-// --- 輔助邏輯：分類與過濾 ---
+// --- 渲染 NPC 列表 ---
 function renderNPCs(list) {
     const grid = document.getElementById('npcGrid');
     if (!grid) return;
     
-    // 清空並重新生成 (你可以加入「分類標題」的邏輯)
     grid.innerHTML = list.map(npc => `
         <div class="npc-card" onclick="showNPCDetail('${npc.name}')">
             <div class="npc-card-header">
-                <img src="${npc.portrait}" class="npc-portrait">
-                <div class="npc-name" style="font-family:'NeuzeitGroteskRegular'">${npc.name}</div>
+                <img src="${npc.portrait}" class="npc-portrait" alt="${npc.name}">
+                <div class="npc-name">${npc.name}</div>
             </div>
             <div class="npc-bday-badge">${npc.birthday}</div>
         </div>
     `).join('');
 }
 
+// --- 顯示 NPC 詳情 (Modal) ---
 function showNPCDetail(name) {
     const npc = npcList.find(n => n.name === name);
+    if (!npc) return; // 安全檢查
+
     const detail = document.getElementById('npcDetail');
     
+    // 生成列表內容
     const scheduleHTML = npc.birthdaySchedule.map(time => `<li>${time}</li>`).join('');
     const lovedHTML = npc.loved.map(item => `<li>${item}</li>`).join('');
 
@@ -66,8 +69,8 @@ function showNPCDetail(name) {
         <div class="modal-header">
             <img src="${npc.portrait}" class="modal-portrait">
             <div class="modal-info">
-                <h2 class="modal-title" style="font-family:'NeuzeitGroteskRegular'">${npc.name}</h2>
-                <p class="modal-birthday" style="color: #d97706;">🎂 生日：${npc.birthday}</p>
+                <h2 class="modal-title">${npc.name}</h2>
+                <p class="modal-birthday">🎂 生日：${npc.birthday}</p>
             </div>
         </div>
         <div class="modal-content-grid">
@@ -84,69 +87,41 @@ function showNPCDetail(name) {
     document.getElementById('npcModal').style.display = "block";
 }
 
-// 搜尋功能
+// --- 搜尋功能 ---
 function filterNPCs() {
     const query = document.getElementById('npcSearch').value.toLowerCase();
     const filtered = npcList.filter(n => n.name.toLowerCase().includes(query));
     renderNPCs(filtered);
 }
 
-// ... (保留最上面的 npcList 資料陣列) ...
-
-// --- 新增：渲染 2x2 四季月曆的函式 ---
-
+// --- 渲染日曆 ---
 function renderCalendars() {
     const container = document.getElementById('calendarGrid');
-    if (!container) return; // 預防找不到容器導致崩潰
+    if (!container) return;
 
     const seasons = ['Spring', 'Summer', 'Fall', 'Winter'];
     const seasonNamesZh = { Spring: '🌸 Spring', Summer: '🌞 Summer', Fall: '🍁 Fall', Winter: '⛄️ Winter' };
 
     container.innerHTML = seasons.map(season => {
         const seasonNPCs = npcList.filter(npc => npc.birthday.startsWith(season));
-        let daysHTML = ''; // 確保變數名稱統一
+        let daysHTML = '';
 
         for (let i = 1; i <= 28; i++) {
             const bdayNPC = seasonNPCs.find(npc => npc.birthday === `${season} ${i}`);
             
-            // 預設內容：僅顯示日期數字
+            // 重要優化：保留日期數字，並判斷是否加入 NPC 頭像
             let content = `<span class="day-number">${i}</span>`;
-
             if (bdayNPC) {
-                // 加入名字並包裝容器
-                content = `
+                content += `
                     <div class="calendar-npc-item" onclick="showNPCDetail('${bdayNPC.name}')">
-                        <img src="${bdayNPC.portrait}" class="calendar-portrait">
-                        <div class="calendar-npc-name">${bdayNPC.name}</div>
+                        <img src="${bdayNPC.portrait}" class="calendar-portrait" title="${bdayNPC.name}">
                     </div>
                 `;
             }
-            daysHTML += `<div class="calendar-day">${content}</div>`;
+            // 如果有生日，給該格加上 has-birthday 的 class 方便做 CSS 樣式
+            daysHTML += `<div class="calendar-day ${bdayNPC ? 'has-birthday' : ''}">${content}</div>`;
         }
 
-        return `
-            <div class="calendar-block">
-                <h3 class="calendar-title">${seasonNamesZh[season]}</h3>
-                <div class="calendar-days-grid">${daysHTML}</div>
-            </div>
-        `;
-    }).join(''); // <--- 這裡原本漏掉了 }).join('');
-}
-
-
-
-            
-if (bdayNPC) {
-    // 將頭像與名字包在一起，並把點擊事件移至外層容器
-    content = `
-        <div class="calendar-npc-item" onclick="showNPCDetail('${bdayNPC.name}')">
-            <img src="${bdayNPC.portrait}" class="calendar-portrait">
-            <div class="calendar-npc-name">${bdayNPC.name}</div>
-        </div>
-    `;
-}
-            
-        // 3. 回傳整個季節區塊的 HTML
         return `
             <div class="calendar-block">
                 <h3 class="calendar-title">${seasonNamesZh[season]}</h3>
@@ -156,24 +131,19 @@ if (bdayNPC) {
     }).join('');
 }
 
-
-// ... (保留原有的 renderNPCs, showNPCDetail, filterNPCs, closeModal 函式) ...
-
-
-// --- 修改啟動事件 ---
-// 確保頁面載入時，同時渲染 NPC 列表和月曆
-document.addEventListener('DOMContentLoaded', () => {
-    renderNPCs(npcList);
-    renderCalendars(); // 新增這一行
-});
-
-
-// 點擊 Modal 外部或關閉按鈕
+// --- 彈窗關閉邏輯 ---
 function closeModal() {
     document.getElementById('npcModal').style.display = "none";
 }
 
-window.onclick = (e) => { if (e.target == document.getElementById('npcModal')) closeModal(); }
+// 點擊 Modal 外部關閉
+window.onclick = (e) => {
+    const modal = document.getElementById('npcModal');
+    if (e.target === modal) closeModal();
+}
 
-// 啟動
-document.addEventListener('DOMContentLoaded', () => renderNPCs(npcList));
+// --- 啟動事件 (統一入口) ---
+document.addEventListener('DOMContentLoaded', () => {
+    renderNPCs(npcList);
+    renderCalendars();
+});
