@@ -3,237 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stardew Helper - 釣魚幫手</title>
+    <title>Stardew Helper - 送禮幫手</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* 針對新欄位的微調 */
-        .season-header {
-            font-family: 'NeuzeitGroteskRegular', sans-serif;
-            font-size: 18px;
-            color: #5c3c1e;
-            margin: 40px 0 15px 0;
-            padding-left: 10px;
-            border-left: 5px solid #d3c4a8;
-        }
-
-        .fish-content-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding-left: 8px;
-            text-align: left;
-        }
-
-        .fish-icon {
-            width: clamp(28px, 2.5vw, 36px);
-            height: auto;
-            image-rendering: pixelated;
-            flex-shrink: 0;
-        }
-
-        /* 標籤化顯示情報 */
-        .info-tag {
-            display: inline-block;
-            font-family: 'NeuzeitGroteskLight', sans-serif;
-            font-size: 11px;
-            padding: 2px 8px;
-            border-radius: 4px;
-            margin: 2px;
-            background: #f5f5f5;
-            color: #444;
-            border: 1px solid #eee;
-        }
-
-        /* 特殊天氣顏色 */
-        .tag-rain { background-color: #d1ecf1; color: #0c5460; border-color: #bee5eb; }
-        .tag-sun { background-color: #fff3cd; color: #856404; border-color: #ffeeba; }
-        .tag-any { background-color: #e2e3e5; color: #383d41; }
-
-        .time-text {
-            font-family: 'NeuzeitGroteskLight', sans-serif;
-            font-size: 11px;
-            color: #666;
-        }
-
-        .header-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            gap: 15px;
-        }
-
-        .search-box {
-            padding: 8px 15px;
-            border: 1px solid #eeeeee;
-            border-radius: 20px;
-            font-family: 'NeuzeitGroteskLight', sans-serif;
-            font-size: 13px;
-            width: 250px;
-            outline: none;
-        }
-    </style>
 </head>
 <body>
 
-    <div class="site-header">
-        <img src="header2.png" alt="Stardew helper" class="header-img">
+<div class="site-header">
+    <img src="header2.png" alt="Stardew Helper" class="header-img">
+</div>
+
+<nav class="main-nav">
+    <a href="index.html" class="nav-item">農作物計算</a>
+    <a href="npc.html" class="nav-item active">送禮幫手</a>
+    <a href="fishing2.html" class="nav-item active">釣魚幫手</a>
+</nav>
+
+<div class="search-container">
+    <input type="text" id="npcSearch" placeholder="搜尋村民名稱..." onkeyup="filterNPCs()" autofocus>
+</div>
+
+<div id="calendarGrid" class="calendar-section-container"></div>
+
+<div id="npcGrid" class="npc-grid"></div>
+
+<div id="npcModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <div id="npcDetail"></div>
     </div>
+</div>
 
-    <nav class="main-nav">
-        <a href="index.html" class="nav-item">農作物計算</a>
-        <a href="npc.html" class="nav-item">送禮幫手</a>
-        <a href="fishing2.html" class="nav-item active">釣魚幫手</a>
-    </nav>
+<script src="npc-data.js"></script>
 
-    <div class="main-content-wrapper">
-        
-        <div class="header-controls">
-            <input type="text" id="fishSearch" class="search-box" placeholder="搜尋魚名、地點、天氣...">
-            
-            <div class="artisan-container">
-                <span>Angler (+50%)</span>
-                <label class="switch">
-                    <input type="checkbox" id="anglerToggle">
-                    <span class="slider round"></span>
-                </label>
-            </div>
-        </div>
+<script>
+    // 這裡可以放一個保險，確保 DOM 加載完畢後執行渲染
+    document.addEventListener('DOMContentLoaded', () => {
+        if (typeof renderCalendars === 'function') renderCalendars();
+        if (typeof renderNPCs === 'function') renderNPCs();
+    });
+</script>
 
-        <div class="season-section">
-            <div class="season-header">🌸 春季 Spring</div>
-            <div class="table-container">
-                <table class="fish-table">
-                    <thead>
-                        <tr class="group-base">
-                            <th>漁獲名稱</th>
-                            <th>售價 (普/銥)</th>
-                            <th class="group-keg">燻魚</th>
-                            <th>出現地點</th>
-                            <th>出現時間</th>
-                            <th>天氣</th>
-                        </tr>
-                    </thead>
-                    <tbody class="fish-tbody">
-                        <tr data-base="200">
-                            <td class="crop-name-cell">
-                                <div class="fish-content-wrapper">
-                                    <img src="https://stardewvalleywiki.com/mediawiki/images/c/ce/Catfish.png" class="fish-icon" alt="鯰魚">
-                                    <div class="crop-info-text">
-                                        <span class="crop-title">鯰魚</span>
-                                        <span class="crop-time">Catfish</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="price-cell">200 / <span style="color: #8a2be2;">400</span></td>
-                            <td class="cell-keg smoked-cell">400</td>
-                            <td><span class="info-tag">河流 / 森林</span></td>
-                            <td><span class="time-text">6am - 12am</span></td>
-                            <td><span class="info-tag tag-rain">雨天</span></td>
-                        </tr>
-                        <tr data-base="100">
-                            <td class="crop-name-cell">
-                                <div class="fish-content-wrapper">
-                                    <img src="https://stardewvalleywiki.com/mediawiki/images/f/f1/Largemouth_Bass.png" class="fish-icon" alt="大嘴鱸魚">
-                                    <div class="crop-info-text">
-                                        <span class="crop-title">大嘴鱸魚</span>
-                                        <span class="crop-time">Largemouth Bass</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="price-cell">100 / <span style="color: #8a2be2;">200</span></td>
-                            <td class="cell-keg smoked-cell">200</td>
-                            <td><span class="info-tag">山區湖泊</span></td>
-                            <td><span class="time-text">6am - 7pm</span></td>
-                            <td><span class="info-tag tag-any">任意</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="season-section">
-            <div class="season-header">☀️ 夏季 Summer</div>
-            <div class="table-container">
-                <table class="fish-table">
-                    <thead>
-                        <tr class="group-base">
-                            <th>漁獲名稱</th>
-                            <th>售價 (普/銥)</th>
-                            <th class="group-keg">燻魚</th>
-                            <th>出現地點</th>
-                            <th>出現時間</th>
-                            <th>天氣</th>
-                        </tr>
-                    </thead>
-                    <tbody class="fish-tbody">
-                        <tr data-base="200">
-                            <td class="crop-name-cell">
-                                <div class="fish-content-wrapper">
-                                    <img src="https://stardewvalleywiki.com/mediawiki/images/b/ba/Pufferfish.png" class="fish-icon" alt="河豚">
-                                    <div class="crop-info-text">
-                                        <span class="crop-title">河豚</span>
-                                        <span class="crop-time">Pufferfish</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="price-cell">200 / <span style="color: #8a2be2;">400</span></td>
-                            <td class="cell-keg smoked-cell">400</td>
-                            <td><span class="info-tag">海洋</span></td>
-                            <td><span class="time-text">12pm - 4pm</span></td>
-                            <td><span class="info-tag tag-sun">晴天</span></td>
-                        </tr>
-                        <tr data-base="200">
-                            <td class="crop-name-cell">
-                                <div class="fish-content-wrapper">
-                                    <img src="https://stardewvalleywiki.com/mediawiki/images/4/42/Sturgeon.png" class="fish-icon" alt="鱘魚">
-                                    <div class="crop-info-text">
-                                        <span class="crop-title">鱘魚</span>
-                                        <span class="crop-time">Sturgeon</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="price-cell">200 / <span style="color: #8a2be2;">400</span></td>
-                            <td class="cell-keg smoked-cell">400</td>
-                            <td><span class="info-tag">山區湖泊</span></td>
-                            <td><span class="time-text">6am - 7pm</span></td>
-                            <td><span class="info-tag tag-any">任意</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-    </div>
-
-    <script>
-        // 1. 搜尋過濾
-        const searchInput = document.getElementById('fishSearch');
-        searchInput.addEventListener('input', function() {
-            const filter = this.value.toLowerCase();
-            const rows = document.querySelectorAll('.fish-tbody tr');
-            rows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                row.style.display = text.includes(filter) ? '' : 'none';
-            });
-        });
-
-        // 2. Angler 價格連動計算
-        const anglerToggle = document.getElementById('anglerToggle');
-        function updatePrices() {
-            const isAngler = anglerToggle.checked;
-            const rows = document.querySelectorAll('.fish-tbody tr');
-            rows.forEach(row => {
-                const base = parseInt(row.getAttribute('data-base'));
-                const currentBase = isAngler ? Math.floor(base * 1.5) : base;
-                const currentIridium = currentBase * 2;
-                const currentSmoked = currentBase * 2; // 燻魚售價 = 魚基礎價 * 2
-
-                row.querySelector('.price-cell').innerHTML = `${currentBase} / <span style="color: #8a2be2;">${currentIridium}</span>`;
-                row.querySelector('.smoked-cell').textContent = currentSmoked;
-            });
-        }
-        anglerToggle.addEventListener('change', updatePrices);
-    </script>
 </body>
 </html>
