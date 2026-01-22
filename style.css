@@ -296,3 +296,79 @@ input:checked + .slider:before { transform: translateX(24px); }
 .schedule-list li:last-child {
     border-bottom: none;
 }
+
+/* 導覽列樣式 */
+.main-nav {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px 0;
+    background-color: #f8f9fa;
+    margin-bottom: 20px;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: #666;
+    font-family: 'NeuzeitGroteskRegular', sans-serif;
+    font-size: 16px;
+    padding: 5px 10px;
+}
+
+.nav-item.active {
+    color: #0000ff;
+    border-bottom: 2px solid #0000ff;
+    font-weight: bold;
+}
+
+/* NPC 網格佈局 */
+.npc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.npc-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.npc-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.npc-portrait {
+    width: 64px;
+    height: 64px;
+    image-rendering: pixelated;
+    margin-bottom: 10px;
+}
+
+/* 彈窗樣式 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 30px;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 12px;
+    font-family: 'NeuzeitGroteskLight', sans-serif;
+}
+
