@@ -91,6 +91,61 @@ function filterNPCs() {
     renderNPCs(filtered);
 }
 
+// ... (保留最上面的 npcList 資料陣列) ...
+
+// --- 新增：渲染 2x2 四季月曆的函式 ---
+function renderCalendars() {
+    const container = document.getElementById('calendarGrid');
+    if (!container) return; // 如果找不到容器就不執行
+
+    const seasons = ['Spring', 'Summer', 'Fall', 'Winter'];
+    const seasonNamesZh = { Spring: '🌸 春季 (Spring)', Summer: '🌞 夏季 (Summer)', Fall: '🍁 秋季 (Fall)', Winter: '⛄️ 冬季 (Winter)' };
+
+    // 遍歷四個季節，生成 HTML
+    container.innerHTML = seasons.map(season => {
+        // 1. 篩選出這個季節生日的所有 NPC
+        const seasonNPCs = npcList.filter(npc => npc.birthday.startsWith(season));
+
+        let daysHTML = '';
+        // 2. 生成 1 到 28 天的格子
+        for (let i = 1; i <= 28; i++) {
+            // 檢查這一天是否有 NPC 生日
+            // (比對格式例如 "Spring 14")
+            const bdayNPC = seasonNPCs.find(npc => npc.birthday === `${season} ${i}`);
+            
+            let content = i; // 預設顯示日期數字
+
+            if (bdayNPC) {
+                // 如果有壽星，顯示可點擊的頭像
+                // 注意這裡的 onclick 直接呼叫了現有的 showNPCDetail 函式
+                content = `<img src="${bdayNPC.portrait}" class="calendar-portrait" onclick="showNPCDetail('${bdayNPC.name}')" title="${bdayNPC.name} 生日">`;
+            }
+            
+            daysHTML += `<div class="calendar-day">${content}</div>`;
+        }
+
+        // 3. 回傳整個季節區塊的 HTML
+        return `
+            <div class="calendar-block">
+                <h3 class="calendar-title">${seasonNamesZh[season]}</h3>
+                <div class="calendar-days-grid">${daysHTML}</div>
+            </div>
+        `;
+    }).join('');
+}
+
+
+// ... (保留原有的 renderNPCs, showNPCDetail, filterNPCs, closeModal 函式) ...
+
+
+// --- 修改啟動事件 ---
+// 確保頁面載入時，同時渲染 NPC 列表和月曆
+document.addEventListener('DOMContentLoaded', () => {
+    renderNPCs(npcList);
+    renderCalendars(); // 新增這一行
+});
+
+
 // 點擊 Modal 外部或關閉按鈕
 function closeModal() {
     document.getElementById('npcModal').style.display = "none";
