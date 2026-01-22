@@ -13,7 +13,7 @@ const npcList = [
     { name: "Sebastian", portrait: "https://stardewvalleywiki.com/mediawiki/images/a/a8/Sebastian.png", birthday: "Winter 10", loved: ["Frozen Tear", "Obsidian", "Pumpkin Soup", "Sashimi", "Void Egg"], birthdaySchedule: ["10:30 AM - 電腦前工作", "03:00 PM - 去廚房喝水", "06:30 PM - 山邊湖泊抽煙", "09:30 PM - 回房間"] },
     { name: "Shane", portrait: "https://stardewvalleywiki.com/mediawiki/images/8/8b/Shane.png", birthday: "Spring 20", loved: ["Beer", "Hot Pepper", "Pizza", "Pepper Poppers"], birthdaySchedule: ["09:00 AM - 牧場房間", "12:00 PM - 在廚房", "05:00 PM - 餐酒館", "11:00 PM - 回家"] },
 
-    // --- 城鎮村民 (Non-Marriage Villagers) ---
+    // --- 城鎮村民 ---
     { name: "Caroline", portrait: "https://stardewvalleywiki.com/mediawiki/images/8/87/Caroline.png", birthday: "Winter 7", loved: ["Fish Taco", "Green Tea", "Summer Spangle", "Tropical Curry"], birthdaySchedule: ["09:00 AM - 雜貨店客廳", "11:30 AM - 雜貨店日光室", "03:30 PM - 社群中心前散步", "09:00 PM - 回家廚房"] },
     { name: "Clint", portrait: "https://stardewvalleywiki.com/mediawiki/images/3/31/Clint.png", birthday: "Winter 26", loved: ["Amethyst", "Aquamarine", "Artichoke Dip", "Emerald", "Fiddlehead Risotto", "Gold Bar", "Iridium Bar", "Jade", "Omni Geode", "Ruby", "Topaz"], birthdaySchedule: ["09:00 AM - 鐵匠鋪櫃檯", "05:00 PM - 鐵匠鋪後方工作", "07:00 PM - 餐酒館", "11:00 PM - 回家"] },
     { name: "Demetrius", portrait: "https://stardewvalleywiki.com/mediawiki/images/f/f9/Demetrius.png", birthday: "Summer 19", loved: ["Bean Hotpot", "Ice Cream", "Rice Pudding", "Strawberry"], birthdaySchedule: ["09:00 AM - 科學實驗室工作", "02:00 PM - 到湖邊觀測生態", "07:00 PM - 實驗室樓下廚房", "10:00 PM - 回臥室"] },
@@ -42,7 +42,6 @@ const npcList = [
 function renderNPCs(list) {
     const grid = document.getElementById('npcGrid');
     if (!grid) return;
-    
     grid.innerHTML = list.map(npc => `
         <div class="npc-card" onclick="showNPCDetail('${npc.name}')">
             <div class="npc-card-header">
@@ -54,17 +53,13 @@ function renderNPCs(list) {
     `).join('');
 }
 
-// --- 顯示 NPC 詳情 (Modal) ---
+// --- 顯示 NPC 詳情 ---
 function showNPCDetail(name) {
     const npc = npcList.find(n => n.name === name);
-    if (!npc) return; // 安全檢查
-
+    if (!npc) return;
     const detail = document.getElementById('npcDetail');
-    
-    // 生成列表內容
     const scheduleHTML = npc.birthdaySchedule.map(time => `<li>${time}</li>`).join('');
     const lovedHTML = npc.loved.map(item => `<li>${item}</li>`).join('');
-
     detail.innerHTML = `
         <div class="modal-header">
             <img src="${npc.portrait}" class="modal-portrait">
@@ -94,7 +89,7 @@ function filterNPCs() {
     renderNPCs(filtered);
 }
 
-// --- 渲染日曆 ---
+// --- 渲染月曆 (已修正邏輯與語法) ---
 function renderCalendars() {
     const container = document.getElementById('calendarGrid');
     if (!container) return;
@@ -108,30 +103,21 @@ function renderCalendars() {
 
         for (let i = 1; i <= 28; i++) {
             const bdayNPC = seasonNPCs.find(npc => npc.birthday === `${season} ${i}`);
-            
-            // 重要優化：保留日期數字，並判斷是否加入 NPC 頭像
-            let content = `<span class="day-number">${i}</span>`;
-            if (bdayNPC) {
-                content += `
-                    <div class="calendar-npc-item" onclick="showNPCDetail('${bdayNPC.name}')">
-                        <img src="${bdayNPC.portrait}" class="calendar-portrait" title="${bdayNPC.name}">
-                    </div>
-                `;
-            }
+            let content = "";
 
-            // 如果有生日：僅顯示頭像容器，不顯示數字
+            if (bdayNPC) {
+                // 有生日：僅顯示頭像容器，不顯示日期數字
                 content = `
                     <div class="calendar-npc-item" onclick="showNPCDetail('${bdayNPC.name}')">
                         <img src="${bdayNPC.portrait}" class="calendar-portrait" title="${bdayNPC.name} 生日">
-                    <div class="calendar-npc-name">${bdayNPC.name}</div>
-                </div>
-            `;
+                        <div class="calendar-npc-name">${bdayNPC.name}</div>
+                    </div>
+                `;
             } else {
-        // 如果沒有生日：僅顯示日期數字
+                // 沒生日：僅顯示日期數字
                 content = `<span class="day-number">${i}</span>`;
-        }
-        
-            // 如果有生日，給該格加上 has-birthday 的 class 方便做 CSS 樣式
+            }
+
             daysHTML += `<div class="calendar-day ${bdayNPC ? 'has-birthday' : ''}">${content}</div>`;
         }
 
@@ -144,18 +130,17 @@ function renderCalendars() {
     }).join('');
 }
 
-// --- 彈窗關閉邏輯 ---
+// --- 彈窗邏輯 ---
 function closeModal() {
     document.getElementById('npcModal').style.display = "none";
 }
 
-// 點擊 Modal 外部關閉
 window.onclick = (e) => {
     const modal = document.getElementById('npcModal');
     if (e.target === modal) closeModal();
-}
+};
 
-// --- 啟動事件 (統一入口) ---
+// --- 啟動事件 ---
 document.addEventListener('DOMContentLoaded', () => {
     renderNPCs(npcList);
     renderCalendars();
