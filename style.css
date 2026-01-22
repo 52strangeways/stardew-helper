@@ -589,6 +589,7 @@ input:checked + .slider:before { transform: translateX(24px); }
         position: static;     /* 取消原本的絕對定位 (左上角) */
         font-size: 13px;      /* 放大數字 */
         font-weight: bold;
+        text-align: center;
         color: #3a5557;
         opacity: 0.7;
         margin: 0;
