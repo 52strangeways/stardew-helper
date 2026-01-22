@@ -118,6 +118,19 @@ function renderCalendars() {
                     </div>
                 `;
             }
+
+            // 如果有生日：僅顯示頭像容器，不顯示數字
+                content = `
+                    <div class="calendar-npc-item" onclick="showNPCDetail('${bdayNPC.name}')">
+                        <img src="${bdayNPC.portrait}" class="calendar-portrait" title="${bdayNPC.name} 生日">
+                    <div class="calendar-npc-name">${bdayNPC.name}</div>
+                </div>
+            `;
+            } else {
+        // 如果沒有生日：僅顯示日期數字
+                content = `<span class="day-number">${i}</span>`;
+        }
+        
             // 如果有生日，給該格加上 has-birthday 的 class 方便做 CSS 樣式
             daysHTML += `<div class="calendar-day ${bdayNPC ? 'has-birthday' : ''}">${content}</div>`;
         }
