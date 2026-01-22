@@ -351,7 +351,7 @@ input:checked + .slider:before { transform: translateX(24px); }
     grid-template-columns: repeat(7, minmax(0, 1fr)); /* 一週 7 天 */
     gap: 2px;
     background-color: #c2cacc; /* 格子背景顏色 */
-    border: 1px solid #576c6e;
+    border: 1px solid #95c6cb;
     /* 修正：使用 minmax(0, 1fr) 確保格子不會被內容撐開 */
     width: 100%;            /* 確保寬度填滿 */
     box-sizing: border-box; /* 確保邊框不會額外增加寬度 */
@@ -370,6 +370,7 @@ input:checked + .slider:before { transform: translateX(24px); }
     font-family: 'NeuzeitGroteskLight', sans-serif;
     padding: 2px;
     font-size: 13px;
+    border: 1px solid #95c6cb;
     color: #3a5557;
     position: relative;
     overflow: hidden;
