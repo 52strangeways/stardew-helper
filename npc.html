@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stardew helper - 送禮幫手 </title>
+    <title>Stardew Helper - 送禮幫手</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="site-header">
-    <img src="header2.png" alt="Stardew helper" class="header-img">
+    <img src="header2.png" alt="Stardew Helper" class="header-img">
 </div>
 
 <nav class="main-nav">
@@ -17,11 +17,8 @@
     <a href="npc.html" class="nav-item active">送禮幫手</a>
 </nav>
 
-<nav class="main-nav">
-    </nav>
-
 <div class="search-container">
-    <input type="text" id="npcSearch" placeholder="搜尋村民名稱..." onkeyup="filterNPCs()">
+    <input type="text" id="npcSearch" placeholder="搜尋村民名稱..." onkeyup="filterNPCs()" autofocus>
 </div>
 
 <div id="calendarGrid" class="calendar-section-container"></div>
@@ -36,5 +33,14 @@
 </div>
 
 <script src="npc-data.js"></script>
+
+<script>
+    // 這裡可以放一個保險，確保 DOM 加載完畢後執行渲染
+    document.addEventListener('DOMContentLoaded', () => {
+        if (typeof renderCalendars === 'function') renderCalendars();
+        if (typeof renderNPCs === 'function') renderNPCs();
+    });
+</script>
+
 </body>
 </html>
