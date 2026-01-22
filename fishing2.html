@@ -3,68 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stardew Helper - 釣魚幫手</title>
+    <title>Stardew Helper - 釣魚百科</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* 針對釣魚頁面的專屬微調，確保與 style.css 完美融合 */
-        .season-header {
-            font-family: 'NeuzeitGroteskRegular', sans-serif;
-            font-size: 18px;
-            color: #5c3c1e;
-            margin: 40px 0 15px 0;
-            padding-left: 10px;
-            border-left: 5px solid #d3c4a8;
-        }
-
-        /* 漁獲名稱與圖片的排版 (參考 .crop-content-wrapper) */
-        .fish-content-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding-left: 8px;
-            text-align: left;
-        }
-
-        .fish-icon {
-            width: clamp(28px, 2.5vw, 36px);
-            height: auto;
-            image-rendering: pixelated;
-            flex-shrink: 0;
-        }
-
-        /* 搜尋欄樣式：與開關並排 */
-        .header-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            gap: 15px;
-        }
-
-        .search-box {
-            padding: 8px 15px;
-            border: 1px solid #eeeeee;
-            border-radius: 20px;
-            font-family: 'NeuzeitGroteskLight', sans-serif;
-            font-size: 13px;
-            width: 250px;
-            outline: none;
-        }
-
-        /* 垂釣條件標籤 */
-        .tag {
-            font-family: 'NeuzeitGroteskLight', sans-serif;
-            font-size: 10px;
-            padding: 2px 8px;
-            border-radius: 10px;
-            background: #f5f5f5;
-            color: #666;
-            margin-right: 4px;
-            white-space: nowrap;
-        }
-        .tag-rain { background-color: #d1ecf1; color: #0c5460; }
-        .tag-sun { background-color: #fff3cd; color: #856404; }
-    </style>
 </head>
 <body>
 
@@ -81,8 +21,7 @@
     <div class="main-content-wrapper">
         
         <div class="header-controls">
-            <input type="text" id="fishSearch" class="search-box" placeholder="搜尋魚名、地點、天氣...">
-            
+            <input type="text" id="fishSearch" class="search-box" placeholder="搜尋魚名、地點、天氣、用途 (如: 收集包)...">
             <div class="artisan-container">
                 <span>Angler (+50%)</span>
                 <label class="switch">
@@ -92,134 +31,194 @@
             </div>
         </div>
 
-        <div class="season-section">
-            <div class="season-header">🌸 春季 Spring</div>
-            <div class="table-container">
-                <table class="fish-table">
-                    <thead>
-                        <tr class="group-base">
-                            <th style="width: 25%;">漁獲名稱</th>
-                            <th style="width: 20%;">售價 (普/銥)</th>
-                            <th class="group-keg">燻魚 (Smoked)</th>
-                            <th style="width: 30%;">垂釣條件</th>
-                        </tr>
-                    </thead>
-                    <tbody class="fish-tbody">
-                        <tr data-base="100">
-                            <td class="crop-name-cell">
-                                <div class="fish-content-wrapper">
-                                    <img src="fish_icon_placeholder.png" class="fish-icon" alt="大嘴鱸魚">
-                                    <div class="crop-info-text">
-                                        <span class="crop-title">大嘴鱸魚</span>
-                                        <span class="crop-time">Largemouth Bass</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="price-cell">100 / <span style="color: #8a2be2;">200</span></td>
-                            <td class="cell-keg smoked-cell">200</td>
-                            <td>
-                                <span class="tag">山區湖泊</span>
-                                <span class="tag">6am - 7pm</span>
-                            </td>
-                        </tr>
-                        <tr data-base="200">
-                            <td class="crop-name-cell">
-                                <div class="fish-content-wrapper">
-                                    <img src="fish_icon_placeholder.png" class="fish-icon" alt="鯰魚">
-                                    <div class="crop-info-text">
-                                        <span class="crop-title">鯰魚</span>
-                                        <span class="crop-time">Catfish</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="price-cell">200 / <span style="color: #8a2be2;">400</span></td>
-                            <td class="cell-keg smoked-cell">400</td>
-                            <td>
-                                <span class="tag">河流</span>
-                                <span class="tag tag-rain">雨天</span>
-                            </td>
-                        </tr>
+        <h2 class="season-title">🌸 春季 Spring</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr class="group-base">
+                        <th style="width: 25%;">漁獲名稱</th>
+                        <th style="width: 20%;">售價 (普/銥)</th>
+                        <th class="group-keg" style="width: 15%;">燻魚售價</th>
+                        <th>出現地點 / 時間 / 天氣</th>
+                    </tr>
+                </thead>
+                <tbody class="fish-tbody">
+                    <tr data-base="200">
+                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/c/ce/Catfish.png" class="fish-icon"><div><b>鯰魚</b><br><small>Catfish</small></div></div></td>
+                        <td class="price-cell">200 / <span style="color: #8a2be2;">400</span></td>
+                        <td class="cell-keg smoked-cell">400</td>
+                        <td><span class="info-tag">河流/森林</span><span class="info-tag">6am-12am</span><span class="info-tag tag-rain">雨天</span></td>
+                    </tr>
+                    <tr data-base="100">
+                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/f/f1/Largemouth_Bass.png" class="fish-icon"><div><b>大嘴鱸魚</b><br><small>Largemouth Bass</small></div></div></td>
+                        <td class="price-cell">100 / <span style="color: #8a2be2;">200</span></td>
+                        <td class="cell-keg smoked-cell">200</td>
+                        <td><span class="info-tag">山區湖泊</span><span class="info-tag">6am-7pm</span><span class="info-tag tag-any">任意</span></td>
+                    </tr>
+                    <tr data-base="60">
+                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/e/ef/Shad.png" class="fish-icon"><div><b>西鯡</b><br><small>Shad</small></div></div></td>
+                        <td class="price-cell">60 / <span style="color: #8a2be2;">120</span></td>
+                        <td class="cell-keg smoked-cell">120</td>
+                        <td><span class="info-tag">河流</span><span class="info-tag">9am-2am</span><span class="info-tag tag-rain">雨天</span></td>
+                    </tr>
+                    <tr data-base="1000">
+                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/f/f0/Legend.png" class="fish-icon"><div><b>傳說之魚</b><br><small>Legend</small></div></div></td>
+                        <td class="price-cell">1000 / <span style="color: #8a2be2;">2000</span></td>
+                        <td class="cell-keg smoked-cell">2000</td>
+                        <td><span class="info-tag" style="color:red; border-color:red;">山區湖泊</span><span class="info-tag">6am-8pm</span><span class="info-tag tag-rain">雨天</span></td>
+                    </tr>
                     </tbody>
-                </table>
-            </div>
+            </table>
         </div>
 
-        <div class="season-section">
-            <div class="season-header">☀️ 夏季 Summer</div>
-            <div class="table-container">
-                <table class="fish-table">
-                    <thead>
-                        <tr class="group-base">
-                            <th style="width: 25%;">漁獲名稱</th>
-                            <th style="width: 20%;">售價 (普/銥)</th>
-                            <th class="group-keg">燻魚 (Smoked)</th>
-                            <th style="width: 30%;">垂釣條件</th>
-                        </tr>
-                    </thead>
-                    <tbody class="fish-tbody">
-                        <tr data-base="200">
-                            <td class="crop-name-cell">
-                                <div class="fish-content-wrapper">
-                                    <img src="fish_icon_placeholder.png" class="fish-icon" alt="河豚">
-                                    <div class="crop-info-text">
-                                        <span class="crop-title">河豚</span>
-                                        <span class="crop-time">Pufferfish</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="price-cell">200 / <span style="color: #8a2be2;">400</span></td>
-                            <td class="cell-keg smoked-cell">400</td>
-                            <td>
-                                <span class="tag">海洋</span>
-                                <span class="tag">12pm - 4pm</span>
-                                <span class="tag tag-sun">晴天</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <h2 class="season-title">☀️ 夏季 Summer</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr class="group-base">
+                        <th style="width: 25%;">漁獲名稱</th>
+                        <th style="width: 20%;">售價 (普/銥)</th>
+                        <th class="group-keg" style="width: 15%;">燻魚售價</th>
+                        <th>出現地點 / 時間 / 天氣</th>
+                    </tr>
+                </thead>
+                <tbody class="fish-tbody">
+                    <tr data-base="200">
+                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/4/42/Sturgeon.png" class="fish-icon"><div><b>鱘魚</b><br><small>Sturgeon</small></div></div></td>
+                        <td class="price-cell">200 / <span style="color: #8a2be2;">400</span></td>
+                        <td class="cell-keg smoked-cell">400</td>
+                        <td><span class="info-tag">山區湖泊</span><span class="info-tag">6am-7pm</span><span class="info-tag">任意</span></td>
+                    </tr>
+                    <tr data-base="200">
+                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/b/ba/Pufferfish.png" class="fish-icon"><div><b>河豚</b><br><small>Pufferfish</small></div></div></td>
+                        <td class="price-cell">200 / <span style="color: #8a2be2;">400</span></td>
+                        <td class="cell-keg smoked-cell">400</td>
+                        <td><span class="info-tag">海洋</span><span class="info-tag">12pm-4pm</span><span class="info-tag tag-sun">晴天</span></td>
+                    </tr>
+                    <tr data-base="150">
+                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/1/12/Octopus.png" class="fish-icon"><div><b>章魚</b><br><small>Octopus</small></div></div></td>
+                        <td class="price-cell">150 / <span style="color: #8a2be2;">300</span></td>
+                        <td class="cell-keg smoked-cell">300</td>
+                        <td><span class="info-tag">海洋</span><span class="info-tag">6am-1pm</span><span class="info-tag">任意</span></td>
+                    </tr>
+                    <tr data-base="250">
+                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/d/d5/Super_Cucumber.png" class="fish-icon"><div><b>超級海參</b><br><small>Super Cucumber</small></div></div></td>
+                        <td class="price-cell">250 / <span style="color: #8a2be2;">500</span></td>
+                        <td class="cell-keg smoked-cell">500</td>
+                        <td><span class="info-tag">海洋</span><span class="info-tag">6pm-2am</span><span class="info-tag">任意</span></td>
+                    </tr>
+                    <tr data-base="1500">
+                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/3/3e/Crimsonfish.png" class="fish-icon"><div><b>緋紅魚</b><br><small>Crimsonfish</small></div></div></td>
+                        <td class="price-cell">1500 / <span style="color: #8a2be2;">3000</span></td>
+                        <td class="cell-keg smoked-cell">3000</td>
+                        <td><span class="info-tag" style="color:red; border-color:red;">東側海洋碼頭</span><span class="info-tag">6am-8pm</span><span class="info-tag">任意</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 class="season-title">🍂 秋季 Fall</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr class="group-base">
+                        <th style="width: 25%;">漁獲名稱</th>
+                        <th style="width: 20%;">售價 (普/銥)</th>
+                        <th class="group-keg" style="width: 15%;">燻魚售價</th>
+                        <th>出現地點 / 時間 / 天氣</th>
+                    </tr>
+                </thead>
+                <tbody class="fish-tbody">
+                    <tr data-base="105">
+                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/0/05/Walleye.png" class="fish-icon"><div><b>玻璃梭鱸</b><br><small>Walleye</small></div></div></td>
+                        <td class="price-cell">105 / <span style="color: #8a2be2;">210</span></td>
+                        <td class="cell-keg smoked-cell">210</td>
+                        <td><span class="info-tag">河流/湖泊/森林</span><span class="info-tag">12pm-2am</span><span class="info-tag tag-rain">雨天</span></td>
+                    </tr>
+                    <tr data-base="150">
+                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/3/33/Midnight_Carp.png" class="fish-icon"><div><b>午夜鯉魚</b><br><small>Midnight Carp</small></div></div></td>
+                        <td class="price-cell">150 / <span style="color: #8a2be2;">300</span></td>
+                        <td class="cell-keg smoked-cell">300</td>
+                        <td><span class="info-tag">山區湖泊/森林池塘</span><span class="info-tag">10pm-2am</span><span class="info-tag">任意</span></td>
+                    </tr>
+                    <tr data-base="150">
+                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/0/01/Tiger_Trout.png" class="fish-icon"><div><b>虎鱒魚</b><br><small>Tiger Trout</small></div></div></td>
+                        <td class="price-cell">150 / <span style="color: #8a2be2;">300</span></td>
+                        <td class="cell-keg smoked-cell">300</td>
+                        <td><span class="info-tag">河流</span><span class="info-tag">6am-7pm</span><span class="info-tag">任意</span></td>
+                    </tr>
+                    <tr data-base="900">
+                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/c/c3/Angler.png" class="fish-icon"><div><b>鮟鱇魚</b><br><small>Angler</small></div></div></td>
+                        <td class="price-cell">900 / <span style="color: #8a2be2;">1800</span></td>
+                        <td class="cell-keg smoked-cell">1800</td>
+                        <td><span class="info-tag" style="color:red; border-color:red;">河流北端橋</span><span class="info-tag">任何時間</span><span class="info-tag">任意</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 class="season-title">❄️ 冬季 Winter</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr class="group-base">
+                        <th style="width: 25%;">漁獲名稱</th>
+                        <th style="width: 20%;">售價 (普/銥)</th>
+                        <th class="group-keg" style="width: 15%;">燻魚售價</th>
+                        <th>出現地點 / 時間 / 天氣</th>
+                    </tr>
+                </thead>
+                <tbody class="fish-tbody">
+                    <tr data-base="80">
+                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/d/dec/Squid.png" class="fish-icon"><div><b>魷魚</b><br><small>Squid</small></div></div></td>
+                        <td class="price-cell">80 / <span style="color: #8a2be2;">160</span></td>
+                        <td class="cell-keg smoked-cell">160</td>
+                        <td><span class="info-tag">海洋</span><span class="info-tag">6pm-2am</span><span class="info-tag">任意</span></td>
+                    </tr>
+                    <tr data-base="120">
+                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/a/a2/Lingcod.png" class="fish-icon"><div><b>蛇鱈</b><br><small>Lingcod</small></div></div></td>
+                        <td class="price-cell">120 / <span style="color: #8a2be2;">240</span></td>
+                        <td class="cell-keg smoked-cell">240</td>
+                        <td><span class="info-tag">河流/湖泊</span><span class="info-tag">任何時間</span><span class="info-tag">任意</span></td>
+                    </tr>
+                    <tr data-base="1000">
+                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/6/61/Glacierfish.png" class="fish-icon"><div><b>冰川魚</b><br><small>Glacierfish</small></div></div></td>
+                        <td class="price-cell">1000 / <span style="color: #8a2be2;">2000</span></td>
+                        <td class="cell-keg smoked-cell">2000</td>
+                        <td><span class="info-tag" style="color:red; border-color:red;">箭頭島南端</span><span class="info-tag">6am-8pm</span><span class="info-tag tag-sun">晴天</span></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
     </div>
 
     <script>
-        // 1. 搜尋過濾邏輯
         const searchInput = document.getElementById('fishSearch');
-        searchInput.addEventListener('input', function() {
-            const filter = this.value.toLowerCase();
-            const rows = document.querySelectorAll('.fish-tbody tr');
+        const anglerToggle = document.getElementById('anglerToggle');
+
+        function updateDisplay() {
+            const filter = searchInput.value.toLowerCase();
+            const isAngler = anglerToggle.checked;
             
-            rows.forEach(row => {
+            document.querySelectorAll('.fish-tbody tr').forEach(row => {
+                // 1. 搜尋過濾
                 const text = row.textContent.toLowerCase();
                 row.style.display = text.includes(filter) ? '' : 'none';
-            });
-        });
 
-        // 2. Angler 職業加成計算邏輯
-        const anglerToggle = document.getElementById('anglerToggle');
-        
-        function updatePrices() {
-            const isAngler = anglerToggle.checked;
-            const rows = document.querySelectorAll('.fish-tbody tr');
-            
-            rows.forEach(row => {
+                // 2. 價格連動
                 const base = parseInt(row.getAttribute('data-base'));
-                
-                // 計算邏輯：Angler 職業售價為 1.5 倍
                 const currentBase = isAngler ? Math.floor(base * 1.5) : base;
                 const currentIridium = currentBase * 2;
-                
-                // 燻魚邏輯：基礎售價 x 2 (1.6版本)
-                // 注意：如果擁有 Angler 職業，燻魚售價也會連帶提升
                 const currentSmoked = currentBase * 2;
 
-                // 更新顯示
                 row.querySelector('.price-cell').innerHTML = `${currentBase} / <span style="color: #8a2be2;">${currentIridium}</span>`;
                 row.querySelector('.smoked-cell').textContent = currentSmoked;
             });
         }
 
-        anglerToggle.addEventListener('change', updatePrices);
+        searchInput.addEventListener('input', updateDisplay);
+        anglerToggle.addEventListener('change', updateDisplay);
     </script>
 </body>
 </html>
