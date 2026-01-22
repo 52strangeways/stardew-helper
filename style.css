@@ -329,8 +329,8 @@ input:checked + .slider:before { transform: translateX(24px); }
 
 /* 單個季節月曆的外觀 */
 .calendar-block {
-    background-color: #b2cbd1; /* 模擬遊戲紙張的米黃色 */
-    border: 3px solid #1e3f47; /* 深棕色邊框 */
+    background-color: #b2cbd1; /* 格子背景色 */
+    border: 2px solid #1e3f47; /* 邊框 */
     border-radius: 8px;
     padding: 10px;
     box-shadow: 4px 4px 0px rgba(0,0,0,0.1); /* 復古感的陰影 */
@@ -342,6 +342,7 @@ input:checked + .slider:before { transform: translateX(24px); }
     font-family: 'NeuzeitGroteskRegular', sans-serif;
     color: #5c3c1e;
     font-size: 20px;
+    font-weight: bold;
 }
 
 /* 28 天的格子 */
@@ -355,8 +356,6 @@ input:checked + .slider:before { transform: translateX(24px); }
     width: 100%;            /* 確保寬度填滿 */
     box-sizing: border-box; /* 確保邊框不會額外增加寬度 */
     overflow: hidden;       /* 萬一有微小溢出，直接裁切 */
-}
-
 }
 
 /* 單一日期格子 */
@@ -397,6 +396,7 @@ input:checked + .slider:before { transform: translateX(24px); }
     line-height:1 ;
     align-self: flex-start; /* 日期數字靠左上角 */
     margin-bottom: 2px;
+    color: #020e54;
     opacity: 0.7;
 }
 
