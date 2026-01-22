@@ -336,8 +336,8 @@ input:checked + .slider:before { transform: translateX(24px); }
 
 /* 單個季節月曆的外觀 */
 .calendar-block {
-    background-color: #f8e8c8; /* 模擬遊戲紙張的米黃色 */
-    border: 3px solid #d4a874; /* 深棕色邊框 */
+    background-color: #b2cbd1; /* 模擬遊戲紙張的米黃色 */
+    border: 3px solid #1e3f47; /* 深棕色邊框 */
     border-radius: 8px;
     padding: 10px;
     box-shadow: 4px 4px 0px rgba(0,0,0,0.1); /* 復古感的陰影 */
@@ -357,30 +357,42 @@ input:checked + .slider:before { transform: translateX(24px); }
     grid-template-columns: repeat(7, 1fr); /* 一週 7 天 */
     gap: 2px;
     background-color: #d4a874; /* 格子線條顏色 */
-    border: 2px solid #d4a874;
+    border: 2px solid #3a5557;
 }
 
 /* 單一日期格子 */
 .calendar-day {
-    background-color: #fdf5e6; /* 格子內部顏色較亮 */
+    background-color: #c2cacc; /* 格子內部顏色較亮 */
     aspect-ratio: 1 / 1; /* 保持正方形 */
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'NeuzeitGroteskLight', sans-serif;
     font-size: 14px;
-    color: #8d6e4b;
+    color: #3a5557;
     position: relative;
 }
 
 /* 月曆中的頭像 */
 .calendar-portrait {
-    width: 90%;
-    height: 90%;
+    width: 70%;
+    height: auto;
     object-fit: contain;
     image-rendering: pixelated;
     cursor: pointer; /* 讓游標變手指 */
     transition: transform 0.1s;
+}
+
+/* 月曆內的名字樣式 */
+.calendar-npc-name {
+    font-family: 'NeuzeitGroteskRegular', sans-serif;
+    font-weight: bold; /* 依據要求使用粗體 */
+    /* 使用 clamp 確保在小螢幕不會破版，在大螢幕易於閱讀 */
+    font-size: clamp(8px, 0.8vw, 10px); 
+    color: #333;
+    text-align: center;
+    line-height: 1;
+    margin-top: 2px;
 }
 
 .calendar-portrait:hover {
