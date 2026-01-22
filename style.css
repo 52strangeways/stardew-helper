@@ -21,8 +21,32 @@ body {
     margin: 0;
     width: 100%;          /* 強制 body 寬度為 100% */
     box-sizing: border-box; /* 確保 padding 不會撐破寬度 */
-    font-family: google-sans;
+    font-family: 'NeuzeitGroteskRegular', -apple-system, sans-serif;
 }
+
+/* 統一限寬容器 */
+.main-content-wrapper {
+    width: 100%;
+    max-width: 1000px; /* 這裡的數值要跟你的 .site-header 一致 */
+    margin: 0 auto;    /* 置中 */
+    box-sizing: border-box;
+}
+
+/* 確保開關靠右對齊容器邊緣 */
+.header-controls {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+/* 表格容器不要重複設定 max-width，讓它填滿 wrapper 即可 */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    background-color: #fff;
+}
+
 
 /* 確保表格橫向填滿 */
 table {
@@ -40,7 +64,6 @@ table {
 /* 修改 .header-img 區塊 */
 .header-img {
     width: 100%;        /* 隨容器寬度縮放 */
-    align: center;
     max-width: 600px;   /* 最大放大到 500px (400px + 25%) */
     height: auto;       /* 保持比例 */
     display: block;
@@ -548,6 +571,13 @@ input:checked + .slider:before { transform: translateX(24px); }
 
 /* 針對手機版 (螢幕寬度 600px 以下) 的微調 */
 @media (max-width: 600px) {
+
+    body {
+        padding: 10px; /* 縮小邊距 */
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+    }
     
     /* 1. 調整格子基礎佈局：讓內容完全置中 */
     .calendar-day {
@@ -597,7 +627,7 @@ input:checked + .slider:before { transform: translateX(24px); }
     
     /* 在這裡修改 NPC 名字的字體大小 */
     .npc-name {
-        font-size: 11px;
+        font-size: 9px;
         text-align: center;
         margin-top: 5px;
     }
@@ -605,14 +635,14 @@ input:checked + .slider:before { transform: translateX(24px); }
     /* NPC 卡片上的生日文字 */
     .npc-birthday {
         font-family: 'NeuzeitGroteskLight', sans-serif;
-        font-size: 8px;      /* 生日通常比名字小，設定為 10px 較為精緻 */
+        font-size: 7px;      /* 生日通常比名字小，設定為 10px 較為精緻 */
         margin-top: 3px;      /* 讓生日跟名字靠得近一點 */
         display: block;       /* 確保它會換行顯示在名字下方 */
     }
 
     .npc-grid {
-        gap: 8px;
-
-}
-
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* 自動填滿 */
+        gap: 5px;
+        padding: 10px;
+    }
 
