@@ -420,7 +420,7 @@ input:checked + .slider:before { transform: translateX(24px); }
     font-family: 'NeuzeitGroteskRegular', sans-serif;
     font-weight: bold; /* 依據要求使用粗體 */
     /* 使用 clamp 確保在小螢幕不會破版，在大螢幕易於閱讀 */
-    font-size: clamp(6px, 0.6vw, 9px); 
+    font-size: clamp(8px, 0.6vw, 11px); 
     color: #333;
     line-height: 1;
     width: 100%;           /* 限制名字寬度 */
