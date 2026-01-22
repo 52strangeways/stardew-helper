@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stardew helper - 村民查詢 </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="main-nav">
+    <a href="index.html" class="nav-item">農作物計算表</a>
+    <a href="npc.html" class="nav-item active">村民查詢</a>
+</nav>
+
+<div class="site-header">
+    <img src="header.png" alt="Stardew helper" class="header-img">
+</div>
+
+<div class="search-container">
+    <input type="text" id="npcSearch" placeholder="搜尋 NPC 名稱..." onkeyup="filterNPCs()">
+</div>
+
+<div class="npc-grid" id="npcGrid">
+    </div>
+
+<div id="npcModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <div id="npcDetail"></div>
+    </div>
+</div>
+
+<script src="npc-data.js"></script>
+</body>
+</html>
