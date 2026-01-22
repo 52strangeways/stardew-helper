@@ -349,7 +349,7 @@ input:checked + .slider:before { transform: translateX(24px); }
 .calendar-days-grid {
     display: grid;
     grid-template-columns: repeat(7, minmax(0, 1fr)); /* 一週 7 天 */
-    gap: 2px;
+    gap: 0;
     background-color: #c2cacc; /* 格子背景顏色 */
     border: 1px solid #95c6cb;
     /* 修正：使用 minmax(0, 1fr) 確保格子不會被內容撐開 */
