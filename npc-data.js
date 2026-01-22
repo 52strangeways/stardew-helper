@@ -89,7 +89,7 @@ function filterNPCs() {
     renderNPCs(filtered);
 }
 
-// --- 渲染月曆 (已修正邏輯與語法) ---
+// --- 渲染月曆 ---
 function renderCalendars() {
     const container = document.getElementById('calendarGrid');
     if (!container) return;
@@ -106,7 +106,7 @@ function renderCalendars() {
             let content = "";
 
             if (bdayNPC) {
-                // 有生日：僅顯示頭像容器，不顯示日期數字
+                // 有生日：顯示頭像 + 小字名字，不顯示日期數字
                 content = `
                     <div class="calendar-npc-item" onclick="showNPCDetail('${bdayNPC.name}')">
                         <img src="${bdayNPC.portrait}" class="calendar-portrait" title="${bdayNPC.name} 生日">
@@ -114,7 +114,7 @@ function renderCalendars() {
                     </div>
                 `;
             } else {
-                // 沒生日：僅顯示日期數字
+                // 沒生日：顯示日期數字
                 content = `<span class="day-number">${i}</span>`;
             }
 
