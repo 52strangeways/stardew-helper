@@ -329,8 +329,8 @@ input:checked + .slider:before { transform: translateX(24px); }
 
 /* 單個季節月曆的外觀 */
 .calendar-block {
-    background-color: #b2cbd1; /* 格子背景色 */
-    border: 2px solid #1e3f47; /* 邊框 */
+    background-color: #d7e8ec; /* 格子背景色 */
+    border: 2px solid #e1e2e3; /* 邊框 */
     border-radius: 8px;
     padding: 10px;
     box-shadow: 4px 4px 0px rgba(0,0,0,0.1); /* 復古感的陰影 */
@@ -351,7 +351,7 @@ input:checked + .slider:before { transform: translateX(24px); }
     grid-template-columns: repeat(7, minmax(0, 1fr)); /* 一週 7 天 */
     gap: 0;
     background-color: #c2cacc; /* 格子背景顏色 */
-    border: 1px solid #95c6cb;
+    border: 1px solid #e0e0e0;
     /* 修正：使用 minmax(0, 1fr) 確保格子不會被內容撐開 */
     width: 100%;            /* 確保寬度填滿 */
     box-sizing: border-box; /* 確保邊框不會額外增加寬度 */
@@ -360,7 +360,7 @@ input:checked + .slider:before { transform: translateX(24px); }
 
 /* 單一日期格子 */
 .calendar-day {
-    background-color: #c2cacc; /* 格子內部顏色較亮 */
+    background-color: #c5d1d4; /* 格子內部顏色較亮 */
     aspect-ratio: 1 / 1; /* 保持正方形 */
     width: 100%;
     display: flex;
@@ -370,7 +370,7 @@ input:checked + .slider:before { transform: translateX(24px); }
     font-family: 'NeuzeitGroteskLight', sans-serif;
     padding: 2px;
     font-size: 13px;
-    border: 1px solid #95c6cb;
+    border: 1px solid #d7e8ec;
     color: #3a5557;
     position: relative;
     overflow: hidden;
