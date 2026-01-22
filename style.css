@@ -221,3 +221,78 @@ td.active-column {
 .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
 input:checked + .slider { background-color: #4caf50; }
 input:checked + .slider:before { transform: translateX(24px); }
+
+
+/* ========= NPC頁面佈局 =========== */
+
+
+/* 彈出視窗內部佈局 */
+.modal-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.modal-portrait {
+    width: 80px;
+    height: 80px;
+    image-rendering: pixelated;
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.modal-title {
+    font-family: 'NeuzeitGroteskRegular', sans-serif;
+    margin: 0;
+    font-size: 24px;
+}
+
+.modal-birthday {
+    font-family: 'NeuzeitGroteskLight', sans-serif;
+    color: #d97706; /* 暖橙色標註生日 */
+    margin: 5px 0 0 0;
+}
+
+.section-label {
+    font-family: 'NeuzeitGroteskRegular', sans-serif;
+    font-size: 16px;
+    margin: 20px 0 10px 0;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 禮物與行程清單樣式 */
+.loved-list, .schedule-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-family: 'NeuzeitGroteskLight', sans-serif;
+}
+
+.loved-list li {
+    display: inline-block;
+    background: #f0f7ff;
+    color: #0000ff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin: 4px;
+    font-size: 13px;
+    border: 1px solid #cce0ff;
+}
+
+.schedule-list li {
+    padding: 8px 0;
+    border-bottom: 1px dashed #eee;
+    font-size: 14px;
+    color: #444;
+}
+
+.schedule-list li:last-child {
+    border-bottom: none;
+}
