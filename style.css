@@ -347,10 +347,16 @@ input:checked + .slider:before { transform: translateX(24px); }
 /* 28 天的格子 */
 .calendar-days-grid {
     display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 一週 7 天 */
+    grid-template-columns: repeat(7, minmax(0, 1fr)); /* 一週 7 天 */
     gap: 2px;
-    background-color: #38524f; /* 格子線條顏色 */
-    border: 1px solid #3a5557;
+    background-color: #838f8d; /* 格子線條顏色 */
+    border: 1px solid #576c6e;
+    /* 修正：使用 minmax(0, 1fr) 確保格子不會被內容撐開 */
+    width: 100%;            /* 確保寬度填滿 */
+    box-sizing: border-box; /* 確保邊框不會額外增加寬度 */
+    overflow: hidden;       /* 萬一有微小溢出，直接裁切 */
+}
+
 }
 
 /* 單一日期格子 */
@@ -359,6 +365,7 @@ input:checked + .slider:before { transform: translateX(24px); }
     aspect-ratio: 1 / 1; /* 保持正方形 */
     width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center; /* 從頂部開始排列 */
     font-family: 'NeuzeitGroteskLight', sans-serif;
@@ -398,14 +405,17 @@ input:checked + .slider:before { transform: translateX(24px); }
     font-family: 'NeuzeitGroteskRegular', sans-serif;
     font-weight: bold; /* 依據要求使用粗體 */
     /* 使用 clamp 確保在小螢幕不會破版，在大螢幕易於閱讀 */
-    font-size: clamp(8px, 0.8vw, 10px); 
+    font-size: clamp(6px, 0.6vw, 9px); 
     color: #333;
     line-height: 1;
+    width: 100%;           /* 限制名字寬度 */
     margin-top: 2px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    white-space: nowrap;   /* 防止名字換行撐開格子 */
+    text-overflow: ellipsis; /* 名字太長顯示 ... */
+    overflow: hidden;
 }
 
 .calendar-npc-item {
@@ -421,7 +431,8 @@ input:checked + .slider:before { transform: translateX(24px); }
 .calendar-portrait:hover {
     transform: scale(1.1); /* 滑鼠移上去稍微放大 */
     width: 80%; /* 稍微調大一點，垂直空間變多了 */
-    max-width: 32px;
+    max-width: 28px;
+    height: auto;
     image-rendering: pixelated;
 }
 
