@@ -95,7 +95,7 @@ function renderCalendars() {
     if (!container) return;
 
     const seasons = ['Spring', 'Summer', 'Fall', 'Winter'];
-    const seasonNamesZh = { Spring: '🌸 Spring', Summer: '🌞 Summer', Fall: '🍁 Fall', Winter: '⛄️ Winter' };
+    const seasonNamesZh = { Spring: 'SPRING', Summer: 'SUMMER', Fall: 'FALL', Winter: 'WINTER' };
 
     container.innerHTML = seasons.map(season => {
         const seasonNPCs = npcList.filter(npc => npc.birthday.startsWith(season));
