@@ -321,14 +321,102 @@ input:checked + .slider:before { transform: translateX(24px); }
     font-weight: bold;
 }
 
+/* --- 新增月曆區域樣式 --- */
+
+/* 2x2 的月曆大容器 */
+.calendar-section-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 左右兩欄 */
+    gap: 25px;
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto 30px auto; /* 下方留點距離 */
+    border-bottom: 2px dashed #eee; /* 分隔線 */
+}
+
+/* 單個季節月曆的外觀 */
+.calendar-block {
+    background-color: #f8e8c8; /* 模擬遊戲紙張的米黃色 */
+    border: 3px solid #d4a874; /* 深棕色邊框 */
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.1); /* 復古感的陰影 */
+}
+
+.calendar-title {
+    text-align: center;
+    margin: 5px 0 10px 0;
+    font-family: 'NeuzeitGroteskRegular', sans-serif;
+    color: #5c3c1e;
+    font-size: 20px;
+}
+
+/* 28 天的格子 */
+.calendar-days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 一週 7 天 */
+    gap: 2px;
+    background-color: #d4a874; /* 格子線條顏色 */
+    border: 2px solid #d4a874;
+}
+
+/* 單一日期格子 */
+.calendar-day {
+    background-color: #fdf5e6; /* 格子內部顏色較亮 */
+    aspect-ratio: 1 / 1; /* 保持正方形 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'NeuzeitGroteskLight', sans-serif;
+    font-size: 14px;
+    color: #8d6e4b;
+    position: relative;
+}
+
+/* 月曆中的頭像 */
+.calendar-portrait {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+    image-rendering: pixelated;
+    cursor: pointer; /* 讓游標變手指 */
+    transition: transform 0.1s;
+}
+
+.calendar-portrait:hover {
+    transform: scale(1.1); /* 滑鼠移上去稍微放大 */
+}
+
 /* NPC 網格佈局 */
 .npc-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-columns: repeat(6, 1fr);
     gap: 20px;
     padding: 20px;
     max-width: 1000px;
     margin: 0 auto;
+}
+
+/* 針對手機版的小調整，避免 6 個擠在一起太小 */
+@media (max-width: 768px) {
+    .npc-grid {
+         /* 手機版也許改為 4 列會比較好讀，若堅持要 6 列可註解掉這一行 */
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        padding: 10px;
+    }
+    .npc-card { padding: 10px 5px; }
+    .npc-name { font-size: 12px; }
+}
+
+/* 2. 居民名字粗體 */
+.npc-name {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+    /* 加入粗體設定 */
+    font-weight: bold;
+    font-family: 'NeuzeitGroteskRegular', sans-serif;
 }
 
 .npc-card {
