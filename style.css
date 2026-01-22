@@ -120,10 +120,41 @@ th, td {
 
 /* 針對手機版的微調 */
 @media (max-width: 600px) {
-    th, td {
-        padding: 8px 4px; /* 手機版縮小間距，給字體留空間 */
+    /* 確保 body 沒有水平溢出，並移除可能導致不對稱的 padding */
+    body {
+        padding: 10px 10px; /* 統一左右間距 */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* 讓所有直接子元素在水平方向置中 */
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* 強制 Header 容器寬度 100% 並置中內容 */
+    .site-header {
+        width: 100%;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* 修正導覽列 */
+    .main-nav {
+        width: 100%;
+        display: flex;
+        justify-content: center; /* 水平置中 */
+        flex-wrap: wrap;        /* 手機版按鈕太多時自動換行 */
+        gap: 15px;              /* 縮小按鈕間距 */
+        padding: 15px 0;
+        margin: 0 auto 20px auto;
+    }
+
+    /* 確保導覽列裡的每一個項目也是置中的 */
+    .nav-item {
+        text-align: center;
     }
 }
+
 
 /* 4. 底色設定 (背景顏色) */
 .group-jar, .col-jar { background-color: #bec9bd; }
