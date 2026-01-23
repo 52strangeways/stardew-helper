@@ -29,13 +29,13 @@ const fishData = {
     ],
     winter: [
         { name: "冰川魚", en: "Glacierfish", base: 1000, loc: "箭頭島南部", time: "6:00 AM - 10:00 PM", weather: "晴天 / 下雪", diff: "100", note: "冬季魚王", img: "6/61/Glacierfish.png" },
-        { name: "蛇鱈", en: "Lingcod", base: 120, loc: "湖", time: "任意", weather: "任意", diff: "85", img: "a/a2/Lingcod.png" },
+        { name: "長蛇齒單線魚", en: "Lingcod", base: 120, loc: "湖", time: "任意", weather: "任意", diff: "85", img: "a/a2/Lingcod.png" },
         { name: "魷魚", en: "Squid", base: 80, loc: "海洋", time: "6:00 PM - 2:00 AM", weather: "任意", diff: "75", note: "炸魷魚", img: "d/dec/Squid.png" }
     ],
     special: [
         { name: "突變鯉魚", en: "Mutant Carp", base: 1000, loc: "下水道", time: "任意", weather: "任意", diff: "80", img: "d/df/Mutant_Carp.png" },
         { name: "熔岩鰻魚", en: "Lava Eel", base: 700, loc: "礦井 100 層", time: "任意", weather: "任意", diff: "90", img: "1/12/Lava_Eel.png" },
-        { name: "沙漠蠍鯉", en: "Scorpion Carp", base: 150, loc: "沙漠", time: "6:00 AM - 10:00 PM", weather: "任意", diff: "90", img: "3/34/Scorpion_Carp.png" },
+        { name: "蠍鯉", en: "Scorpion Carp", base: 150, loc: "沙漠", time: "6:00 AM - 10:00 PM", weather: "任意", diff: "90", img: "3/34/Scorpion_Carp.png" },
         { name: "林躍魚", en: "Woodskip", base: 75, loc: "森林池塘", time: "任意", weather: "任意", diff: "50", img: "7/73/Woodskip.png" }
     ],
     crabpot: [
@@ -48,19 +48,18 @@ const fishData = {
 // 2. 狀態管理
 let currentSeason = 'spring';
 
-// 3. 切換季節函數
+// 3. 切換季節函數 (掛載到 window 確保 HTML 的 onclick 能找到)
 window.switchSeason = function(season) {
     currentSeason = season;
     // 更新按鈕樣式
     document.querySelectorAll('.tab-btn').forEach(btn => {
-        // 檢查按鈕文字或 onclick 內容來決定 active
-        const btnSeason = btn.getAttribute('onclick').match(/'([^']+)'/)[1];
-        btn.classList.toggle('active', btnSeason === season);
+        const btnOnclick = btn.getAttribute('onclick');
+        btn.classList.toggle('active', btnOnclick.includes(season));
     });
     renderTable();
 };
 
-// 4. 核心渲染與邏輯函數
+// 4. 核心渲染函數
 function renderTable() {
     const root = document.getElementById('fishing-root');
     if (!root) return;
@@ -68,14 +67,14 @@ function renderTable() {
     const isAngler = document.getElementById('anglerToggle')?.checked;
     const filter = document.getElementById('fishSearch')?.value.toLowerCase() || '';
     
-    // 過濾數據：根據當前季節 + 搜尋文字
+    // 過濾數據
     const fishes = fishData[currentSeason].filter(f => 
         f.name.includes(filter) || 
         f.en.toLowerCase().includes(filter) || 
         f.loc.includes(filter)
     );
 
-    // 生成表格 HTML
+    // 建立 HTML 結構
     root.innerHTML = `
         <div class="table-container">
             <table>
@@ -96,22 +95,22 @@ function renderTable() {
                                 <div class="fish-content-wrapper">
                                     <img src="https://stardewvalleywiki.com/mediawiki/images/${fish.img}" class="fish-icon">
                                     <div class="crop-info-text">
-                                        <span class="crop-title">${fish.name}</span>
-                                        <span class="crop-time">${fish.en}</span>
+                                        <span class="crop-title" style="font-weight:600;">${fish.name}</span>
+                                        <span class="crop-time" style="font-size:0.85em;">${fish.en}</span>
                                     </div>
                                 </div>
                             </td>
-                            <td class="price-cell">${base} / <span class="price-iridium">${base * 2}</span></td>
-                            <td class="smoked-cell">${currentSeason === 'crabpot' ? '-' : base * 2}</td>
+                            <td class="price-cell">${base} / <span class="price-iridium" style="color:#8a2be2; font-weight:bold;">${base * 2}</span></td>
+                            <td class="smoked-cell" style="background-color:#e9eaf0; color:#060061; font-weight:bold;">${currentSeason === 'crabpot' ? '-' : base * 2}</td>
                             <td>
-                                <span class="info-tag">${fish.loc}</span>
-                                ${fish.time ? `<span class="info-tag">${fish.time}</span>` : ''}
-                                ${fish.weather ? `<span class="info-tag ${fish.weather.includes('雨') ? 'tag-rain' : 'tag-sun'}">${fish.weather}</span>` : ''}
-                                <span class="info-tag ${parseInt(fish.diff) >= 90 ? 'tag-hard' : ''}">難度 ${fish.diff || '-'}</span>
-                                ${fish.note ? `<span class="note-text" style="font-size:10px; color:#888; display:block; margin-top:4px;">${fish.note}</span>` : ''}
+                                <span class="info-tag" style="display:inline-block; padding:2px 8px; background:#f5f5f5; border-radius:4px; margin:2px;">${fish.loc}</span>
+                                ${fish.time ? `<span class="info-tag" style="display:inline-block; padding:2px 8px; background:#f5f5f5; border-radius:4px; margin:2px;">${fish.time}</span>` : ''}
+                                ${fish.weather ? `<span class="info-tag ${fish.weather.includes('雨') ? 'tag-rain' : 'tag-sun'}" style="display:inline-block; padding:2px 8px; border-radius:4px; margin:2px;">${fish.weather}</span>` : ''}
+                                <span class="info-tag ${parseInt(fish.diff) >= 90 ? 'tag-hard' : ''}" style="display:inline-block; padding:2px 8px; border-radius:4px; margin:2px;">難度 ${fish.diff || '-'}</span>
+                                ${fish.note ? `<span style="display:block; font-size:10px; color:#888; margin-top:4px;">${fish.note}</span>` : ''}
                             </td>
                         </tr>`;
-                    }).join('') : `<tr><td colspan="4" style="padding:20px; color:#999;">找不到符合搜尋條件的魚類</td></tr>`}
+                    }).join('') : `<tr><td colspan="4" style="padding:20px; color:#999; text-align:center;">找不到符合搜尋條件的魚類</td></tr>`}
                 </tbody>
             </table>
         </div>`;
@@ -119,10 +118,7 @@ function renderTable() {
 
 // 5. 事件綁定與初始化
 document.addEventListener('DOMContentLoaded', () => {
-    // 執行第一次渲染
     renderTable();
-
-    // 綁定輸入與開關事件
     document.getElementById('anglerToggle')?.addEventListener('change', renderTable);
     document.getElementById('fishSearch')?.addEventListener('input', renderTable);
 });
