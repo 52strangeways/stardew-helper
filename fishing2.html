@@ -21,7 +21,7 @@
     <div class="main-content-wrapper">
         
         <div class="header-controls">
-            <input type="text" id="fishSearch" class="search-box" placeholder="搜尋魚名、地點、天氣或用途...">
+            <input type="text" id="fishSearch" class="search-box" placeholder="搜尋魚名、地點、用途 (例如: 炸魷魚)...">
             <div class="artisan-container">
                 <span>Angler (+50%)</span>
                 <label class="switch">
@@ -31,256 +31,72 @@
             </div>
         </div>
 
-        <h2 class="season-title">🌸 春季 Spring</h2>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr class="group-base">
-                        <th style="width: 25%;">漁獲名稱</th>
-                        <th style="width: 20%;">售價 (普/銥)</th>
-                        <th class="group-keg" style="width: 15%;">燻魚售價</th>
-                        <th>詳細情報 (地點 / 時間 / 天氣 / 難度 / 備註)</th>
-                    </tr>
-                </thead>
-                <tbody class="fish-tbody">
-                    <tr data-base="11250">
-                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/f/f0/Legend.png" class="fish-icon"><div><b>傳說之魚</b><br><small>Legend</small></div></div></td>
-                        <td class="price-cell">11250 / <span style="color: #8a2be2;">22500</span></td>
-                        <td class="cell-keg smoked-cell">22500</td>
-                        <td><span class="info-tag">礦井外的湖</span><span class="info-tag">6am-10pm</span><span class="info-tag tag-rain">下雨</span><span class="info-tag" style="color:#d9534f">難度 110</span><br><small>春季魚王，每個季度一次</small></td>
-                    </tr>
-                    <tr data-base="200">
-                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/c/ce/Catfish.png" class="fish-icon"><div><b>鯰魚</b><br><small>Catfish</small></div></div></td>
-                        <td class="price-cell">200 / <span style="color: #8a2be2;">400</span></td>
-                        <td class="cell-keg smoked-cell">400</td>
-                        <td><span class="info-tag">小河/森林池塘</span><span class="info-tag">任意</span><span class="info-tag tag-rain">下雨</span><span class="info-tag">難度 75</span><br><small>春/秋/冬天</small></td>
-                    </tr>
-                    <tr data-base="30">
-                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/3/3d/Sunfish.png" class="fish-icon"><div><b>翻車魚</b><br><small>Sunfish</small></div></div></td>
-                        <td class="price-cell">30 / <span style="color: #8a2be2;">60</span></td>
-                        <td class="cell-keg smoked-cell">60</td>
-                        <td><span class="info-tag">小河</span><span class="info-tag">6am-7pm</span><span class="info-tag tag-sun">晴天</span><span class="info-tag">難度 30</span><br><small>春/夏天，可用於烤魚</small></td>
-                    </tr>
-                    <tr data-base="40">
-                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/0/01/Sardine.png" class="fish-icon"><div><b>沙丁魚</b><br><small>Sardine</small></div></div></td>
-                        <td class="price-cell">40 / <span style="color: #8a2be2;">80</span></td>
-                        <td class="cell-keg smoked-cell">80</td>
-                        <td><span class="info-tag">海洋</span><span class="info-tag">6am-7pm</span><span class="info-tag">任意</span><span class="info-tag">難度 30</span><br><small>春/秋/冬天，可用於海之佳餚</small></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <div id="fishing-data-container">
+            <section class="season-section" id="spring-section">
+                <h2 class="season-title">🌸 春季 Spring</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr class="group-base">
+                                <th style="width: 25%;">漁獲名稱</th>
+                                <th style="width: 20%;">售價 (普/銥)</th>
+                                <th class="group-keg" style="width: 15%;">燻魚售價</th>
+                                <th>詳細情報 (地點 / 時間 / 天氣 / 難度 / 備註)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="fish-tbody" id="spring-tbody">
+                            </tbody>
+                    </table>
+                </div>
+            </section>
 
-        <h2 class="season-title">☀️ 夏季 Summer</h2>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr class="group-base">
-                        <th style="width: 25%;">漁獲名稱</th>
-                        <th style="width: 20%;">售價 (普/銥)</th>
-                        <th class="group-keg" style="width: 15%;">燻魚售價</th>
-                        <th>詳細情報 (地點 / 時間 / 天氣 / 難度 / 備註)</th>
-                    </tr>
-                </thead>
-                <tbody class="fish-tbody">
-                    <tr data-base="1500">
-                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/3/3e/Crimsonfish.png" class="fish-icon"><div><b>深紅魚</b><br><small>Crimsonfish</small></div></div></td>
-                        <td class="price-cell">1500 / <span style="color: #8a2be2;">3000</span></td>
-                        <td class="cell-keg smoked-cell">3000</td>
-                        <td><span class="info-tag">海洋(東碼頭)</span><span class="info-tag">任意</span><span class="info-tag">任意</span><span class="info-tag" style="color:#d9534f">難度 95</span><br><small>夏季魚王，每個季度一次</small></td>
-                    </tr>
-                    <tr data-base="150">
-                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/1/12/Octopus.png" class="fish-icon"><div><b>章魚</b><br><small>Octopus</small></div></div></td>
-                        <td class="price-cell">150 / <span style="color: #8a2be2;">300</span></td>
-                        <td class="cell-keg smoked-cell">300</td>
-                        <td><span class="info-tag">海洋</span><span class="info-tag">6am-1pm</span><span class="info-tag">任意</span><span class="info-tag" style="color:#d9534f">難度 95</span></td>
-                    </tr>
-                    <tr data-base="200">
-                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/b/ba/Pufferfish.png" class="fish-icon"><div><b>河豚</b><br><small>Pufferfish</small></div></div></td>
-                        <td class="price-cell">200 / <span style="color: #8a2be2;">400</span></td>
-                        <td class="cell-keg smoked-cell">400</td>
-                        <td><span class="info-tag">海洋</span><span class="info-tag">12pm-4pm</span><span class="info-tag tag-sun">晴天</span><span class="info-tag">難度 80</span></td>
-                    </tr>
-                    <tr data-base="65">
-                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/3/3b/Rainbow_Trout.png" class="fish-icon"><div><b>彩虹鱒魚</b><br><small>Rainbow Trout</small></div></div></td>
-                        <td class="price-cell">65 / <span style="color: #8a2be2;">130</span></td>
-                        <td class="cell-keg smoked-cell">130</td>
-                        <td><span class="info-tag">小河/山上</span><span class="info-tag">6am-7pm</span><span class="info-tag tag-sun">晴天</span><span class="info-tag">難度 45</span><br><small>可用於鮭魚湯</small></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+            <section class="season-section" id="summer-section">
+                <h2 class="season-title">☀️ 夏季 Summer</h2>
+                <div class="table-container">
+                    <table>
+                        <tbody class="fish-tbody" id="summer-tbody"></tbody>
+                    </table>
+                </div>
+            </section>
 
-        <h2 class="season-title">🍂 秋季 Fall</h2>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr class="group-base">
-                        <th style="width: 25%;">漁獲名稱</th>
-                        <th style="width: 20%;">售價 (普/銥)</th>
-                        <th class="group-keg" style="width: 15%;">燻魚售價</th>
-                        <th>詳細情報 (地點 / 時間 / 天氣 / 難度 / 備註)</th>
-                    </tr>
-                </thead>
-                <tbody class="fish-tbody">
-                    <tr data-base="900">
-                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/c/c3/Angler.png" class="fish-icon"><div><b>垂釣者</b><br><small>Angler</small></div></div></td>
-                        <td class="price-cell">900 / <span style="color: #8a2be2;">1800</span></td>
-                        <td class="cell-keg smoked-cell">1800</td>
-                        <td><span class="info-tag">Joja超市北面木橋</span><span class="info-tag">任意</span><span class="info-tag">任意</span><span class="info-tag" style="color:#d9534f">難度 85</span><br><small>秋季魚王，每個季度一次</small></td>
-                    </tr>
-                    <tr data-base="105">
-                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/0/05/Walleye.png" class="fish-icon"><div><b>白目魚</b><br><small>Walleye</small></div></div></td>
-                        <td class="price-cell">105 / <span style="color: #8a2be2;">210</span></td>
-                        <td class="cell-keg smoked-cell">210</td>
-                        <td><span class="info-tag">小河/湖/池塘</span><span class="info-tag">12pm-2am</span><span class="info-tag tag-rain">下雨</span><span class="info-tag">難度 45</span></td>
-                    </tr>
-                    <tr data-base="75">
-                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/e/e4/Salmon.png" class="fish-icon"><div><b>鮭魚</b><br><small>Salmon</small></div></div></td>
-                        <td class="price-cell">75 / <span style="color: #8a2be2;">150</span></td>
-                        <td class="cell-keg smoked-cell">150</td>
-                        <td><span class="info-tag">小河</span><span class="info-tag">6am-7pm</span><span class="info-tag">任意</span><span class="info-tag">難度 50</span><br><small>可用於鮭魚晚餐</small></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+            <section class="season-section" id="fall-section">
+                <h2 class="season-title">🍂 秋季 Fall</h2>
+                <div class="table-container">
+                    <table>
+                        <tbody class="fish-tbody" id="fall-tbody"></tbody>
+                    </table>
+                </div>
+            </section>
 
-        <h2 class="season-title">❄️ 冬季 Winter</h2>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr class="group-base">
-                        <th style="width: 25%;">漁獲名稱</th>
-                        <th style="width: 20%;">售價 (普/銥)</th>
-                        <th class="group-keg" style="width: 15%;">燻魚售價</th>
-                        <th>詳細情報 (地點 / 時間 / 天氣 / 難度 / 備註)</th>
-                    </tr>
-                </thead>
-                <tbody class="fish-tbody">
-                    <tr data-base="1000">
-                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/6/61/Glacierfish.png" class="fish-icon"><div><b>冰川魚</b><br><small>Glacierfish</small></div></div></td>
-                        <td class="price-cell">1000 / <span style="color: #8a2be2;">2000</span></td>
-                        <td class="cell-keg smoked-cell">2000</td>
-                        <td><span class="info-tag">箭頭島南部</span><span class="info-tag">6am-10pm</span><span class="info-tag">晴天/下雪</span><span class="info-tag" style="color:#d9534f">難度 100</span><br><small>冬季魚王，每個季度一次</small></td>
-                    </tr>
-                    <tr data-base="120">
-                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/a/a2/Lingcod.png" class="fish-icon"><div><b>長蛇齒單線魚</b><br><small>Lingcod</small></div></div></td>
-                        <td class="price-cell">120 / <span style="color: #8a2be2;">240</span></td>
-                        <td class="cell-keg smoked-cell">240</td>
-                        <td><span class="info-tag">湖</span><span class="info-tag">任意</span><span class="info-tag">任意</span><span class="info-tag" style="color:#d9534f">難度 85</span></td>
-                    </tr>
-                    <tr data-base="80">
-                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/d/dec/Squid.png" class="fish-icon"><div><b>魷魚</b><br><small>Squid</small></div></div></td>
-                        <td class="price-cell">80 / <span style="color: #8a2be2;">160</span></td>
-                        <td class="cell-keg smoked-cell">160</td>
-                        <td><span class="info-tag">海洋</span><span class="info-tag">6pm-2am</span><span class="info-tag">任意</span><span class="info-tag">難度 75</span><br><small>可用於炸魷魚</small></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+            <section class="season-section" id="winter-section">
+                <h2 class="season-title">❄️ 冬季 Winter</h2>
+                <div class="table-container">
+                    <table>
+                        <tbody class="fish-tbody" id="winter-tbody"></tbody>
+                    </table>
+                </div>
+            </section>
 
-        <h2 class="season-title">🗺️ 特殊區域 / 全季節 (All Seasons)</h2>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr class="group-base">
-                        <th style="width: 25%;">漁獲名稱</th>
-                        <th style="width: 20%;">售價 (普/銥)</th>
-                        <th class="group-keg" style="width: 15%;">燻魚售價</th>
-                        <th>詳細情報 (地點 / 時間 / 天氣 / 難度 / 備註)</th>
-                    </tr>
-                </thead>
-                <tbody class="fish-tbody">
-                    <tr data-base="1000">
-                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/d/df/Mutant_Carp.png" class="fish-icon"><div><b>突變鯉魚</b><br><small>Mutant Carp</small></div></div></td>
-                        <td class="price-cell">1000 / <span style="color: #8a2be2;">2000</span></td>
-                        <td class="cell-keg smoked-cell">2000</td>
-                        <td><span class="info-tag">下水道</span><span class="info-tag">任意</span><span class="info-tag">任意</span><span class="info-tag">難度 80</span><br><small>魚王，一年一次</small></td>
-                    </tr>
-                    <tr data-base="700">
-                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/1/12/Lava_Eel.png" class="fish-icon"><div><b>熔岩鰻魚</b><br><small>Lava Eel</small></div></div></td>
-                        <td class="price-cell">700 / <span style="color: #8a2be2;">1400</span></td>
-                        <td class="cell-keg smoked-cell">1400</td>
-                        <td><span class="info-tag">礦井 100層</span><span class="info-tag">任意</span><span class="info-tag">任意</span><span class="info-tag" style="color:#d9534f">難度 90</span></td>
-                    </tr>
-                    <tr data-base="150">
-                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/3/34/Scorpion_Carp.png" class="fish-icon"><div><b>蠍鯉</b><br><small>Scorpion Carp</small></div></div></td>
-                        <td class="price-cell">150 / <span style="color: #8a2be2;">300</span></td>
-                        <td class="cell-keg smoked-cell">300</td>
-                        <td><span class="info-tag">沙漠</span><span class="info-tag">6am-10pm</span><span class="info-tag">任意</span><span class="info-tag" style="color:#d9534f">難度 90</span></td>
-                    </tr>
-                    <tr data-base="100">
-                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/f/f1/Largemouth_Bass.png" class="fish-icon"><div><b>大口黑鱸</b><br><small>Largemouth Bass</small></div></div></td>
-                        <td class="price-cell">100 / <span style="color: #8a2be2;">200</span></td>
-                        <td class="cell-keg smoked-cell">200</td>
-                        <td><span class="info-tag">礦井外的湖</span><span class="info-tag">6am-7pm</span><span class="info-tag">任意</span><span class="info-tag">難度 50</span><br><small>可用於脆皮鱸魚</small></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+            <section class="season-section" id="special-section">
+                <h2 class="season-title">🗺️ 特殊區域 / 全季節</h2>
+                <div class="table-container">
+                    <table>
+                        <tbody class="fish-tbody" id="special-tbody"></tbody>
+                    </table>
+                </div>
+            </section>
 
-        <h2 class="season-title">🦀 蟹籠 (Crab Pot)</h2>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr class="group-base">
-                        <th style="width: 25%;">名稱</th>
-                        <th style="width: 20%;">基礎售價</th>
-                        <th>地點 / 料理用途</th>
-                    </tr>
-                </thead>
-                <tbody class="fish-tbody">
-                    <tr data-base="120">
-                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/9/9f/Lobster.png" class="fish-icon"><div><b>龍蝦</b><br><small>Lobster</small></div></div></td>
-                        <td>120</td>
-                        <td><span class="info-tag">海洋</span><span class="info-tag">龍蝦濃湯</span></td>
-                    </tr>
-                    <tr data-base="100">
-                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/0/05/Crab.png" class="fish-icon"><div><b>蟹</b><br><small>Crab</small></div></div></td>
-                        <td>100</td>
-                        <td><span class="info-tag">海洋</span><span class="info-tag">蟹餅</span></td>
-                    </tr>
-                    <tr data-base="75">
-                        <td><div class="fish-content-wrapper"><img src="https://stardewvalleywiki.com/mediawiki/images/5/53/Crayfish.png" class="fish-icon"><div><b>小龍蝦</b><br><small>Crayfish</small></div></div></td>
-                        <td>75</td>
-                        <td><span class="info-tag">淡水</span><span class="info-tag">燉魚 (35%機率)</span></td>
-                    </tr>
-                </tbody>
-            </table>
+            <section class="season-section" id="crabpot-section">
+                <h2 class="season-title">🦀 蟹籠 Crab Pot</h2>
+                <div class="table-container">
+                    <table>
+                        <tbody class="fish-tbody" id="crabpot-tbody"></tbody>
+                    </table>
+                </div>
+            </section>
         </div>
-
     </div>
 
-    <script>
-        // 搜尋與價格計算邏輯維持原本高效能版本
-        const searchInput = document.getElementById('fishSearch');
-        const anglerToggle = document.getElementById('anglerToggle');
-
-        function updateDisplay() {
-            const filter = searchInput.value.toLowerCase();
-            const isAngler = anglerToggle.checked;
-            
-            document.querySelectorAll('.fish-tbody tr').forEach(row => {
-                const text = row.textContent.toLowerCase();
-                row.style.display = text.includes(filter) ? '' : 'none';
-
-                const baseAttr = row.getAttribute('data-base');
-                if (baseAttr && row.querySelector('.price-cell')) {
-                    const base = parseInt(baseAttr);
-                    const currentBase = isAngler ? Math.floor(base * 1.5) : base;
-                    const currentIridium = currentBase * 2;
-                    const currentSmoked = currentBase * 2;
-
-                    row.querySelector('.price-cell').innerHTML = `${currentBase} / <span style="color: #8a2be2;">${currentIridium}</span>`;
-                    if (row.querySelector('.smoked-cell')) {
-                        row.querySelector('.smoked-cell').textContent = currentSmoked;
-                    }
-                }
-            });
-        }
-
-        searchInput.addEventListener('input', updateDisplay);
-        anglerToggle.addEventListener('change', updateDisplay);
-    </script>
+    <script src="fishing_script.js"></script>
 </body>
 </html>
