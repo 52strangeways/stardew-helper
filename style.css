@@ -645,3 +645,121 @@ input:checked + .slider:before { transform: translateX(24px); }
         padding: 10px;
     }
 
+
+
+/* =========================================
+   ========= 釣魚助手專屬樣式區塊 ===========
+   ========================================= */
+
+/* 1. 季節大標題 - 延續 NeuzeitGroteskRegular 風格 */
+.season-title {
+    font-family: 'NeuzeitGroteskRegular', sans-serif;
+    font-size: 20px;
+    color: #5c3c1e; /* 經典木質深棕 */
+    margin: 40px 0 15px 0;
+    padding-left: 10px;
+    border-left: 5px solid #d3c4a8; /* 淺色邊框點綴 */
+    font-weight: bold;
+}
+
+/* 2. 漁獲內容包裝 (參考 .crop-content-wrapper) */
+.fish-content-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-left: 8px;
+    text-align: left;
+}
+
+.fish-icon {
+    width: clamp(28px, 2.5vw, 36px);
+    height: auto;
+    image-rendering: pixelated; /* 確保像素風清晰 */
+    flex-shrink: 0;
+}
+
+/* 3. 情報標籤系統 (地點/時間/天氣/難度) */
+.info-tag {
+    display: inline-block;
+    font-family: 'NeuzeitGroteskLight', sans-serif;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin: 2px;
+    background-color: #f5f5f5;
+    color: #444;
+    border: 1px solid #eeeeee;
+    white-space: nowrap;
+}
+
+/* 針對天氣的特殊配色 */
+.tag-rain {
+    background-color: #d1ecf1; /* 淡淡的雨天藍 */
+    color: #0c5460;
+    border-color: #bee5eb;
+}
+
+.tag-sun {
+    background-color: #fff3cd; /* 淡淡的晴天黃 */
+    color: #856404;
+    border-color: #ffeeba;
+}
+
+/* 針對難度的配色 (高難度魚類) */
+.tag-hard {
+    color: #d9534f; /* 警告紅 */
+    font-weight: bold;
+}
+
+/* 4. 價格與加乘標註 (同步農作物頁面配色) */
+.smoked-cell {
+    background-color: #e9eaf0; /* 同 .cell-keg 底色 */
+    color: #060061;           /* 同 .cell-keg 文字顏色 */
+    font-weight: 500;
+}
+
+.price-iridium {
+    color: #8a2be2; /* 銥品質專屬紫色 */
+    font-weight: bold;
+}
+
+/* 5. 搜尋框微調 (讓它在 header-controls 中更美觀) */
+.search-box {
+    padding: 8px 15px;
+    border: 1px solid #eeeeee;
+    border-radius: 20px;
+    font-family: 'NeuzeitGroteskLight', sans-serif;
+    font-size: 13px;
+    width: 100%;
+    max-width: 250px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.search-box:focus {
+    border-color: #2c6aa3;
+}
+
+/* 6. 手機版微調 (釣魚頁面專用) */
+@media (max-width: 600px) {
+    /* 讓搜尋與開關在手機上改為垂直排列並靠右 */
+    .header-controls {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+    }
+    
+    .search-box {
+        max-width: 100%; /* 手機上搜尋框填滿 */
+    }
+
+    .fish-content-wrapper {
+        gap: 8px;
+    }
+
+    .season-title {
+        font-size: 16px;
+        margin: 25px 0 10px 0;
+    }
+}
+              
