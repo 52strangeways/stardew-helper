@@ -74,7 +74,7 @@ const fishData = {
 // 1. 核心渲染函數
 function renderTables() {
     for (const [season, fishes] of Object.entries(fishData)) {
-        const tbody = document.getElementById(`${season}-tbody`);
+        const tbody = document.getElementById('fishing-root');
         if (!tbody) continue;
 
         tbody.innerHTML = fishes.map(fish => `
