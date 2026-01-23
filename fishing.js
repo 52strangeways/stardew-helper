@@ -69,7 +69,9 @@ const fishData = {
     ]
 };
 
-// 渲染與計算邏輯保持不變
+// ... (fishData 內容保持不變，略) ...
+
+// 1. 核心渲染函數
 function renderTables() {
     for (const [season, fishes] of Object.entries(fishData)) {
         const tbody = document.getElementById(`${season}-tbody`);
@@ -80,44 +82,68 @@ function renderTables() {
                 <td>
                     <div class="fish-content-wrapper">
                         <img src="https://stardewvalleywiki.com/mediawiki/images/${fish.img}" class="fish-icon">
-                        <div><b>${fish.name}</b><br><small>${fish.en}</small></div>
+                        <div class="crop-info-text">
+                            <span class="crop-title">${fish.name}</span>
+                            <span class="crop-time">${fish.en}</span>
+                        </div>
                     </div>
                 </td>
-                <td class="price-cell">${fish.base} / <span class="price-iridium">${fish.base * 2}</span></td>
-                <td class="smoked-cell">${season === 'crabpot' ? (fish.note || '-') : fish.base * 2}</td>
-                <td>
+                <td class="price-cell"></td> <td class="smoked-cell"></td> <td>
                     <span class="info-tag">${fish.loc}</span>
                     ${fish.time ? `<span class="info-tag">${fish.time}</span>` : ''}
                     ${fish.weather ? `<span class="info-tag ${fish.weather.includes('雨') ? 'tag-rain' : 'tag-sun'}">${fish.weather}</span>` : ''}
                     ${fish.diff ? `<span class="info-tag ${parseInt(fish.diff) >= 90 ? 'tag-hard' : ''}">難度 ${fish.diff}</span>` : ''}
-                    ${fish.note && season !== 'crabpot' ? `<br><small>${fish.note}</small>` : ''}
+                    ${fish.note ? `<br><small style="font-family:'NeuzeitGroteskLight'; color:#666;">${fish.note}</small>` : ''}
                 </td>
             </tr>
         `).join('');
     }
+    // 渲染完後立即執行一次更新，確保售價正確
+    updatePrices();
 }
 
+// 2. 統一更新函數 (售價 + 搜尋)
 function updatePrices() {
-    const isAngler = document.getElementById('anglerToggle').checked;
-    const filter = document.getElementById('fishSearch').value.toLowerCase();
+    const anglerToggle = document.getElementById('anglerToggle');
+    const searchInput = document.getElementById('fishSearch');
+    
+    const isAngler = anglerToggle ? anglerToggle.checked : false;
+    const filter = searchInput ? searchInput.value.toLowerCase() : '';
 
     document.querySelectorAll('.fish-tbody tr').forEach(row => {
         const base = parseInt(row.getAttribute('data-base'));
         const text = row.textContent.toLowerCase();
         
+        // --- 搜尋邏輯 ---
         row.style.display = text.includes(filter) ? '' : 'none';
 
+        // --- 售價邏輯 ---
         const currentBase = isAngler ? Math.floor(base * 1.5) : base;
+        const iridiumPrice = currentBase * 2;
+        const smokedPrice = currentBase * 2;
+
         const priceCell = row.querySelector('.price-cell');
         const smokedCell = row.querySelector('.smoked-cell');
 
-        if (priceCell && smokedCell && !row.closest('#crabpot-section')) {
-            priceCell.innerHTML = `${currentBase} / <span class="price-iridium">${currentBase * 2}</span>`;
-            smokedCell.textContent = currentBase * 2;
+        if (priceCell) {
+            priceCell.innerHTML = `${currentBase} / <span class="price-iridium">${iridiumPrice}</span>`;
+        }
+        
+        // 蟹籠區塊通常不顯示燻魚售價，顯示備註
+        if (smokedCell) {
+            if (row.closest('#crabpot-section')) {
+                // 保持原樣或顯示特定備註
+            } else {
+                smokedCell.textContent = smokedPrice;
+            }
         }
     });
 }
 
-document.getElementById('anglerToggle')?.addEventListener('change', updatePrices);
-document.getElementById('fishSearch')?.addEventListener('input', updatePrices);
-window.onload = renderTables;
+// 3. 事件綁定
+document.addEventListener('DOMContentLoaded', () => {
+    renderTables();
+
+    document.getElementById('anglerToggle')?.addEventListener('change', updatePrices);
+    document.getElementById('fishSearch')?.addEventListener('input', updatePrices);
+});
