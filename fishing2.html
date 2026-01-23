@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stardew Helper 釣魚助手</title>
+    <title>Stardew Helper 釣魚幫手</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,8 +20,7 @@
 
     <div class="main-content-wrapper">
         <div class="header-controls">
-            <input type="text" id="fishSearch" class="search-box" placeholder="搜尋魚名、地點、天氣...">
-            
+            <input type="text" id="fishSearch" class="search-box" placeholder="搜尋魚名、地點、用途...">
             <div class="artisan-container">
                 <span>Angler (+50%)</span>
                 <label class="switch">
@@ -29,6 +28,15 @@
                     <span class="slider round"></span>
                 </label>
             </div>
+        </div>
+
+        <div class="season-tabs">
+            <button class="tab-btn active" onclick="switchSeason('spring')">🌸 春季</button>
+            <button class="tab-btn" onclick="switchSeason('summer')">☀️ 夏季</button>
+            <button class="tab-btn" onclick="switchSeason('fall')">🍂 秋季</button>
+            <button class="tab-btn" onclick="switchSeason('winter')">❄️ 冬季</button>
+            <button class="tab-btn" onclick="switchSeason('special')">🗺️ 特殊</button>
+            <button class="tab-btn" onclick="switchSeason('crabpot')">🦀 蟹籠</button>
         </div>
 
         <div id="fishing-root"></div>
