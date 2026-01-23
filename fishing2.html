@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stardew Helper - 釣魚百科全書</title>
+    <title>Stardew Helper 釣魚助手</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,9 +19,9 @@
     </nav>
 
     <div class="main-content-wrapper">
-        
         <div class="header-controls">
-            <input type="text" id="fishSearch" class="search-box" placeholder="搜尋魚名、地點、用途 (例如: 炸魷魚)...">
+            <input type="text" id="fishSearch" class="search-box" placeholder="搜尋魚名、地點、天氣...">
+            
             <div class="artisan-container">
                 <span>Angler (+50%)</span>
                 <label class="switch">
@@ -31,72 +31,9 @@
             </div>
         </div>
 
-        <div id="fishing-data-container">
-            <section class="season-section" id="spring-section">
-                <h2 class="season-title">🌸 春季 Spring</h2>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr class="group-base">
-                                <th style="width: 25%;">漁獲名稱</th>
-                                <th style="width: 20%;">售價 (普/銥)</th>
-                                <th class="group-keg" style="width: 15%;">燻魚售價</th>
-                                <th>詳細情報 (地點 / 時間 / 天氣 / 難度 / 備註)</th>
-                            </tr>
-                        </thead>
-                        <tbody class="fish-tbody" id="spring-tbody">
-                            </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <section class="season-section" id="summer-section">
-                <h2 class="season-title">☀️ 夏季 Summer</h2>
-                <div class="table-container">
-                    <table>
-                        <tbody class="fish-tbody" id="summer-tbody"></tbody>
-                    </table>
-                </div>
-            </section>
-
-            <section class="season-section" id="fall-section">
-                <h2 class="season-title">🍂 秋季 Fall</h2>
-                <div class="table-container">
-                    <table>
-                        <tbody class="fish-tbody" id="fall-tbody"></tbody>
-                    </table>
-                </div>
-            </section>
-
-            <section class="season-section" id="winter-section">
-                <h2 class="season-title">❄️ 冬季 Winter</h2>
-                <div class="table-container">
-                    <table>
-                        <tbody class="fish-tbody" id="winter-tbody"></tbody>
-                    </table>
-                </div>
-            </section>
-
-            <section class="season-section" id="special-section">
-                <h2 class="season-title">🗺️ 特殊區域 / 全季節</h2>
-                <div class="table-container">
-                    <table>
-                        <tbody class="fish-tbody" id="special-tbody"></tbody>
-                    </table>
-                </div>
-            </section>
-
-            <section class="season-section" id="crabpot-section">
-                <h2 class="season-title">🦀 蟹籠 Crab Pot</h2>
-                <div class="table-container">
-                    <table>
-                        <tbody class="fish-tbody" id="crabpot-tbody"></tbody>
-                    </table>
-                </div>
-            </section>
-        </div>
+        <div id="fishing-root"></div>
     </div>
 
-    <script src="fishing.js"></script>
+    <script src="fishing_script.js"></script>
 </body>
 </html>
