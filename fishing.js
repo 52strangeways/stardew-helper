@@ -74,43 +74,58 @@ function renderTable() {
         f.loc.includes(filter)
     );
 
-    // 建立 HTML 結構
+    // 建立 8 欄位表格
     root.innerHTML = `
         <div class="table-container">
             <table>
                 <thead>
                     <tr class="group-base">
-                        <th style="width: 25%;">漁獲名稱</th>
-                        <th style="width: 20%;">售價 (普/銥)</th>
-                        <th class="group-keg" style="width: 18%;">燻魚售價</th>
-                        <th>詳細情報</th>
+                        <th>頭像</th>
+                        <th>漁獲名稱</th>
+                        <th>地點</th>
+                        <th>天氣</th>
+                        <th>時間</th>
+                        <th>售價 (普/銥/燻)</th>
+                        <th>難度</th>
+                        <th>備註</th>
                     </tr>
                 </thead>
                 <tbody class="fish-tbody">
-                    ${fishes.length > 0 ? fishes.map(fish => {
+                    ${fishes.map(fish => {
                         const base = isAngler ? Math.floor(fish.base * 1.5) : fish.base;
+                        const smoked = base * 2;
+                        const weatherClass = fish.weather.includes('雨') ? 'tag-rain' : (fish.weather.includes('晴') ? 'tag-sun' : '');
+
                         return `
                         <tr>
-                            <td>
-                                <div class="fish-content-wrapper">
-                                    <img src="https://stardewvalleywiki.com/mediawiki/images/${fish.img}" class="fish-icon">
-                                    <div class="crop-info-text">
-                                        <span class="crop-title" style="font-weight:600;">${fish.name}</span>
-                                        <span class="crop-time" style="font-size:0.85em;">${fish.en}</span>
+                            <td style="width: 50px;">
+                                <img src="https://stardewvalleywiki.com/mediawiki/images/${fish.img}" class="fish-icon" style="display: block; margin: 0 auto;">
+                            </td>
+                            <td style="width: 130px;">
+                                <div class="crop-info-text">
+                                    <span class="crop-title" style="font-weight:600;">${fish.name}</span>
+                                    <span class="crop-time" style="font-size:10px;">${fish.en}</span>
+                                </div>
+                            </td>
+                            <td><span class="info-tag">${fish.loc}</span></td>
+                            <td><span class="info-tag ${weatherClass}">${fish.weather}</span></td>
+                            <td><span class="info-tag">${fish.time || '任意'}</span></td>
+                            <td style="width: 120px;">
+                                <div style="line-height: 1.4;">
+                                    ${base} / <span class="price-iridium">${base * 2}</span>
+                                    <div class="cell-keg" style="font-size: 10px; padding: 2px 4px; border-radius: 4px; margin-top: 4px;">
+                                        燻: ${smoked}
                                     </div>
                                 </div>
                             </td>
-                            <td class="price-cell">${base} / <span class="price-iridium" style="color:#8a2be2; font-weight:bold;">${base * 2}</span></td>
-                            <td class="smoked-cell" style="background-color:#e9eaf0; color:#060061; font-weight:bold;">${currentSeason === 'crabpot' ? '-' : base * 2}</td>
-                            <td>
-                                <span class="info-tag" style="display:inline-block; padding:2px 8px; background:#f5f5f5; border-radius:4px; margin:2px;">${fish.loc}</span>
-                                ${fish.time ? `<span class="info-tag" style="display:inline-block; padding:2px 8px; background:#f5f5f5; border-radius:4px; margin:2px;">${fish.time}</span>` : ''}
-                                ${fish.weather ? `<span class="info-tag ${fish.weather.includes('雨') ? 'tag-rain' : 'tag-sun'}" style="display:inline-block; padding:2px 8px; border-radius:4px; margin:2px;">${fish.weather}</span>` : ''}
-                                <span class="info-tag ${parseInt(fish.diff) >= 90 ? 'tag-hard' : ''}" style="display:inline-block; padding:2px 8px; border-radius:4px; margin:2px;">難度 ${fish.diff || '-'}</span>
-                                ${fish.note ? `<span style="display:block; font-size:10px; color:#888; margin-top:4px;">${fish.note}</span>` : ''}
+                            <td style="width: 60px;">
+                                <span class="info-tag ${parseInt(fish.diff) >= 90 ? 'tag-hard' : ''}">
+                                    ${fish.diff || '-'}
+                                </span>
                             </td>
+                            <td><span class="note-text">${fish.note || '-'}</span></td>
                         </tr>`;
-                    }).join('') : `<tr><td colspan="4" style="padding:20px; color:#999; text-align:center;">找不到符合搜尋條件的魚類</td></tr>`}
+                    }).join('')}
                 </tbody>
             </table>
         </div>`;
