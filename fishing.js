@@ -82,9 +82,7 @@ window.switchSeason = function(season) {
     renderTable();
 };
 
-// 1. 漁獲資料庫保持不變 (略，使用您原本的數據)
-
-// 4. 核心渲染函數 (更新為顯示魚卵售價)
+// 4. 核心渲染函數 (8 欄位邏輯)
 function renderTable() {
     const root = document.getElementById('fishing-root');
     if (!root) return;
@@ -95,6 +93,7 @@ function renderTable() {
     const fishes = fishData[currentSeason].filter(f => 
         f.name.includes(filter) || f.en.toLowerCase().includes(filter) || f.loc.includes(filter)
     );
+
 
     root.innerHTML = `
         <div class="table-container">
@@ -113,16 +112,13 @@ function renderTable() {
                 </thead>
                 <tbody class="fish-tbody">
                     ${fishes.length > 0 ? fishes.map(fish => {
-                        // 計算邏輯
                         const base = isAngler ? Math.floor(fish.base * 1.5) : fish.base;
-                        const iridium = base * 2;
-                        
                         // 魚卵計算公式：30 + (基礎售價 * 0.5)
                         // 備註：魚卵不受專業技能(釣客)加成影響
                         const roePrice = 30 + Math.floor(fish.base * 0.5);
                         
                         const weatherClass = fish.weather.includes('雨') ? 'tag-rain' : (fish.weather.includes('晴') ? 'tag-sun' : '');
-                        const isCrabPot = !fish.time; // 蟹籠魚類通常沒有時間
+                        const iscrabpot = !fish.time; // 蟹籠魚類通常沒有時間
 
                         return `
                         <tr>
@@ -134,15 +130,12 @@ function renderTable() {
                                 </div>
                             </td>
                             <td><span class="info-tag">${fish.loc}</span></td>
-                            <td><span class="info-tag ${weatherClass}">${fish.weather || '任意'}</span></td>
+                            <td><span class="info-tag ${weatherClass}">${fish.weather}</span></td>
                             <td><span class="info-tag">${fish.time || '任意'}</span></td>
                             <td>
                                 <div style="line-height: 1.4;">
-                                    ${base} / <span class="price-iridium" style="color:#8a2be2; font-weight:bold;">${iridium}</span>
-                                    ${!isCrabPot || fish.name === '龍蝦' ? `
-                                    <div class="cell-roe" style="font-size:10px; padding:2px 4px; border-radius:4px; margin-top:4px; background-color:#fff0f0; color:#c0392b; border:1px solid #ffcccc; font-weight:bold;">
-                                        卵: ${roePrice}
-                                    </div>` : ''}
+                                    ${base} / <span class="price-iridium" style="color:#8a2be2; font-weight:bold;">${base * 2}</span>
+                                    <div class="cell-keg" style="font-size:10px; padding:2px 4px; border-radius:4px; margin-top:4px; background-color:#e9eaf0; color:#060061; font-weight:bold;">魚卵: ${roePrice}</div>
                                 </div>
                             </td>
                             <td><span class="info-tag ${parseInt(fish.diff) >= 90 ? 'tag-hard' : ''}">${fish.diff || '-'}</span></td>
@@ -155,3 +148,10 @@ function renderTable() {
             </table>
         </div>`;
 }
+
+// 5. 初始化與事件綁定
+document.addEventListener('DOMContentLoaded', () => {
+    renderTable();
+    document.getElementById('anglerToggle')?.addEventListener('change', renderTable);
+    document.getElementById('fishSearch')?.addEventListener('input', renderTable);
+});
