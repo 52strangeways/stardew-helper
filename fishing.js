@@ -96,7 +96,7 @@ function renderTable() {
 
     root.innerHTML = `
         <div class="table-container">
-            <table>
+            <table class="fishing-table">
                 <thead>
                     <tr class="group-base">
                         <th style="width: 50px;">頭像</th>
