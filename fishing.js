@@ -102,13 +102,13 @@ function renderTable() {
             <table class="fishing-table">
                 <thead>
                     <tr class="group-base">
-                        <th style="width: 50px;">頭像</th>
-                        <th style="width: 140px;">漁獲名稱</th>
-                        <th>地點</th>
+                        <th style="width: 45px;">頭像</th>
+                        <th style="width: 120px;">漁獲名稱</th>
+                        <th style="width: 160px;">地點</th>
                         <th style="width: 80px;">天氣</th>
-                        <th style="width: 160px;">時間</th>
-                        <th style="width: 120px;">售價 (普/銥/燻)</th>
-                        <th style="width: 60px;">難度</th>
+                        <th style="width: 150px;">時間</th>
+                        <th style="width: 110px;">售價 (普/銥/燻)</th>
+                        <th style="width: 40px;">難度</th>
                         <th>備註</th>
                     </tr>
                 </thead>
