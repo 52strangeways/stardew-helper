@@ -79,37 +79,46 @@ function calculateData() {
     const artisanMult = isArtisan ? 1.4 : 1;
     return crops.map(c => {
         const seedCost = c.isMulti ? 0 : c.seedCost;
+        // 修正：計算生產效率，如果是連作作物則看回長天數
         const effectiveGrowth = (c.isMulti ? c.regrow : c.growthDays) / c.yield;
 
+        // --- 1. 加工售價計算 ---
         let jarPrice = (c.basePrice * 2 + 50) * artisanMult;
         let kegPrice = (c.type === 'fruit' ? c.basePrice * 3 : c.basePrice * 2.25) * artisanMult;
         if (c.kegOverride) kegPrice = c.kegOverride * artisanMult;
+        
+        // 脫水機：5個水果變1個乾，售價 = (5 * base * 1.5 + 25) / 5 (單顆貢獻)
         let dehydPrice = ((7.5 * c.basePrice + 25) / 5) * artisanMult;
         if (c.dehydOverride) dehydPrice = c.dehydOverride * artisanMult;
 
         if (c.noProcess) { jarPrice = 0; kegPrice = 0; dehydPrice = 0; }
 
-                // --- 加工時間邏輯 (關鍵修正) ---
-        let jarTime = 2.8; // 罐頭瓶統一約 2.8 天 (4000 min)
-        let kegTime = c.type === 'fruit' ? 7 : 4; // 預設：酒 7 天 / 果汁 4 天
+        // --- 2. 加工時間邏輯 (修正點：確保應用於計算) ---
+        let jarTime = 2.8; 
+        let kegTime = c.type === 'fruit' ? 7 : 4; 
         
-        // 根據 Wiki 設定特殊加工時間 (以天為單位)
-        if (c.name === "Hops") kegTime = 1.4;        // 淡啤酒只需 1.4 天
-        if (c.name === "Wheat") kegTime = 1.1;       // 啤酒只需 1.1 天
-        if (c.name === "Coffee Bean") kegTime = 0.08; // 咖啡只需 2 小時 (0.08 天)
-        if (c.name === "Tea Leaves") kegTime = 0.125; // 綠茶只需 3 小時 (0.125 天)
-        if (c.name === "Unmilled Rice") kegTime = 0.4; // 醋只需 10 小時 (0.4 天)
+        if (c.name === "Hops") kegTime = 1.4;        
+        if (c.name === "Wheat") kegTime = 1.1;       
+        if (c.name === "Coffee Bean") kegTime = 0.08; 
+        if (c.name === "Tea Leaves") kegTime = 0.125; 
+        if (c.name === "Unmilled Rice") kegTime = 0.4; 
 
+        // --- 3. 回傳物件 (修正語法錯誤) ---
         return {
             ...c,
             base_price: c.basePrice,
-            jar_price: jarPrice, jar_net: jarPrice ? jarPrice - seedCost : 0, jar_daily: jarPrice ? (jarPrice - seedCost) / (effectiveGrowth + 2.8) : 0,
-            keg_price: kegPrice, keg_net: kegPrice ? kegPrice - seedCost : 0, keg_daily: kegPrice ? (kegPrice - seedCost) / (effectiveGrowth + 7) : 0,
-            dehyd_price: c.type === 'fruit' ? dehydPrice : 0, dehyd_net: c.type === 'fruit' ? dehydPrice - seedCost : 0, dehyd_daily: c.type === 'fruit' ? (dehydPrice - seedCost) / (effectiveGrowth + 0.2) : 
-        };
-    });
-}
-
+            // 醃製桶
+            jar_price: jarPrice, 
+            jar_net: jarPrice ? jarPrice - seedCost : 0, 
+            jar_daily: jarPrice ? (jarPrice - seedCost) / (effectiveGrowth + jarTime) : 0,
+            // 釀酒桶 (修正分母：將 7 改為 kegTime)
+            keg_price: kegPrice, 
+            keg_net: kegPrice ? kegPrice - seedCost : 0, 
+            keg_daily: kegPrice ? (kegPrice - seedCost) / (effectiveGrowth + kegTime) : 0,
+            // 脫水機
+            dehyd_price: c.type === 'fruit' ? dehydPrice : 0, 
+            dehyd_net: c.type === 'fruit' ? dehydPrice - seedCost : 0, 
+            dehyd_daily: c.type === 'fruit' ? (dehydPrice - seedCost) / (effectiveGrowth + 0.2) : 0 // 修正此處邏輯
         };
     });
 }
