@@ -491,7 +491,7 @@ td.active-column {
 
 /*///==========/* 9. [釣魚助手] 8 欄位擠進 1000px 專用設定 ////*==========/*/
 .fishing-table {
-    table-layout: auto; /* 只有釣魚表格強制固定寬度 */
+    table-layout: fixed; /* 只有釣魚表格強制固定寬度 */
 }
 
 .fishing-table th, .fishing-table td {
