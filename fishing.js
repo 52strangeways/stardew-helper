@@ -90,11 +90,9 @@ function renderTable() {
     const isAngler = document.getElementById('anglerToggle')?.checked;
     const filter = document.getElementById('fishSearch')?.value.toLowerCase() || '';
     
-    const fishes = sourceData.filter(f => 
-    (f.name && f.name.includes(filter)) || 
-    (f.en && f.en.toLowerCase().includes(filter)) || 
-    (f.loc && (f.loc || '').includes(filter)) // 加上安全保護
-);
+    const fishes = fishData[currentSeason].filter(f => 
+        f.name.includes(filter) || f.en.toLowerCase().includes(filter) || f.loc.includes(filter)
+    );
 
 
     root.innerHTML = `
