@@ -64,7 +64,7 @@ body {
 /* 5. 搜尋與控制區 */
 .header-controls {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     width: 100%;
     margin-bottom: 20px;
 }
@@ -525,6 +525,6 @@ td.active-column {
 @media (max-width: 600px) {
     .table-container { overflow-x: auto; -webkit-overflow-scrolling: touch;}
     table { min-width: 800px; } /* 在手機上保持基本寬度供捲動 */
-    .header-controls { flex-direction: column; align-items: flex-end; gap: 12px; }
+    .header-controls { flex-direction: column; align-items: space-between; gap: 12px; }
     .npc-grid { grid-template-columns: repeat(3, 1fr); }
 }
