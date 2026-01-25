@@ -107,11 +107,55 @@ th, td {
 
 th { font-weight: 600; background-color: #f5f5f5; }
 
-/* 7. [農作物頁面] 特有配色 */
-.group-keg, .col-keg { background-color: #bdbec9; color: #05022e; }
-.cell-keg, .smoked-cell { background-color: var(--bg-keg); color: var(--text-keg); font-weight: bold !important; }
-.group-jar, .cell-jar { background-color: #bec9bd; color: #00260a; }
-.group-dehydrator, .cell-dehyd { background-color: #c9bdbd; color: #2e0000; }
+
+/* 4. 農作物表格底色設定 (背景顏色) */
+.group-jar, .col-jar { background-color: #bec9bd; }
+.cell-jar { background-color: #e9f0e9; }
+.group-keg, .col-keg { background-color: #bdbec9; } 
+.cell-keg { background-color: #e9eaf0; }
+.group-dehydrator, .col-dehyd { background-color: #c9bdbd; } 
+.cell-dehyd { background-color: #f0e9e9; }
+
+/* Base 標題格子的顏色設定 */
+.group-base {
+    background-color: #f5f5f5; /* 背景 */
+    color: #333333;           /* 標題字體顏色 */
+}
+
+/* Base 數據格子的顏色設定 */
+.cell-base {
+    background-color: #f5f5f5; /* 數據格底色 */
+    color: #333333;           /* 數字字體顏色 */
+}
+
+/* 當 Base 被點擊排序時的高光 (會覆蓋上面的顏色) */
+.cell-base.active-column {
+    color: #0000ff !important;
+    font-weight: bold !important;
+}
+
+/* 5. 標題字體顏色 (小標題) */
+.col-jar { color: #001a07; }
+.col-keg { color: #05022e; }
+.col-dehyd { color: #1c0101; }
+
+/* 6. 數字字體顏色 */
+.cell-jar { color: #00260a; }
+.cell-keg { color: #060061; }
+.cell-dehyd { color: #2e0000; }
+
+/* 7. 點擊排序後的整欄高光樣式 */
+.active-column {
+    color: #0000ff !important;
+    font-weight: bold !important;
+    /* 這裡可以選擇是否要加一個淡淡的底色，讓整欄更顯眼 */
+    background-color: rgba(0, 0, 255, 0.05) !important; 
+}
+
+/* 確保原本的售價、淨利顏色在 active 時被覆蓋 */
+td.active-column {
+    color: #0000ff !important;
+}
 
 /* ========= NPC頁面佈局 =========== */
 
