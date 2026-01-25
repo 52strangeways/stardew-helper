@@ -14,7 +14,9 @@ const crops = [
     { name: "Blue Jazz", type: "flower", img: "https://stardewvalleywiki.com/mediawiki/images/2/2f/Blue_Jazz.png", growthDays: 7, seedCost: 30, basePrice: 50, isMulti: false, regrow: 0, yield: 1 },
     { name: "Tulip", type: "flower", img: "https://stardewvalleywiki.com/mediawiki/images/c/cf/Tulip.png", growthDays: 6, seedCost: 20, basePrice: 30, isMulti: false, regrow: 0, yield: 1 },
     { name: "Coffee Bean", type: "fruit", img: "https://stardewvalleywiki.com/mediawiki/images/3/33/Coffee_Bean.png", growthDays: 10, seedCost: 0, basePrice: 15, isMulti: true, regrow: 2, yield: 4, kegOverride: 30 }, 
-
+    { name: "Unmilled Rice", type: "veg", img: "https://stardewvalleywiki.com/mediawiki/images/d/da/Unmilled_Rice.png", growthDays: 8, seedCost: 40, basePrice: 30, isMulti: false, regrow: 0, yield: 1, kegOverride: 100 }, // 放入桶中變醋 (Vinegar)
+    { name: "Tea Leaves", type: "veg", img: "https://stardewvalleywiki.com/mediawiki/images/5/59/Tea_Leaves.png", growthDays: 20, seedCost: 0, basePrice: 50, isMulti: true, regrow: 1, yield: 1, kegOverride: 100 }, // 放入桶中變綠茶 (Green Tea)
+    
     // --- 夏季 (Summer) ---
     { name: "Tomato", type: "veg", img: "https://stardewvalleywiki.com/mediawiki/images/9/9d/Tomato.png", growthDays: 11, seedCost: 50, basePrice: 60, isMulti: true, regrow: 4, yield: 1 },
     { name: "Hot Pepper", type: "fruit", img: "https://stardewvalleywiki.com/mediawiki/images/f/f1/Hot_Pepper.png", growthDays: 5, seedCost: 40, basePrice: 40, isMulti: true, regrow: 3, yield: 1 },
@@ -26,7 +28,10 @@ const crops = [
     { name: "Red Cabbage", type: "veg", img: "https://stardewvalleywiki.com/mediawiki/images/2/2d/Red_Cabbage.png", growthDays: 9, seedCost: 100, basePrice: 260, isMulti: false, regrow: 0, yield: 1 },
     { name: "Radish", type: "veg", img: "https://stardewvalleywiki.com/mediawiki/images/d/d5/Radish.png", growthDays: 6, seedCost: 40, basePrice: 90, isMulti: false, regrow: 0, yield: 1 },
     { name: "Wheat", type: "veg", img: "https://stardewvalleywiki.com/mediawiki/images/e/e2/Wheat.png", growthDays: 4, seedCost: 10, basePrice: 25, isMulti: false, regrow: 0, yield: 1, kegOverride: 200 },
-
+    { name: "Sunflower", type: "flower", img: "https://stardewvalleywiki.com/mediawiki/images/8/81/Sunflower.png", growthDays: 8, seedCost: 200, basePrice: 80, isMulti: false, regrow: 0, yield: 1 },
+    { name: "Poppy", type: "flower", img: "https://stardewvalleywiki.com/mediawiki/images/6/62/Poppy.png", growthDays: 7, seedCost: 100, basePrice: 140, isMulti: false, regrow: 0, yield: 1 },
+    { name: "Summer Spangle", type: "flower", img: "https://stardewvalleywiki.com/mediawiki/images/9/9b/Summer_Spangle.png", growthDays: 8, seedCost: 50, basePrice: 90, isMulti: false, regrow: 0, yield: 1 },
+    
     // --- 秋季 (Fall) ---
     { name: "Pumpkin", type: "veg", img: "https://stardewvalleywiki.com/mediawiki/images/6/64/Pumpkin.png", growthDays: 13, seedCost: 100, basePrice: 320, isMulti: false, regrow: 0, yield: 1 },
     { name: "Eggplant", type: "veg", img: "https://stardewvalleywiki.com/mediawiki/images/8/8f/Eggplant.png", growthDays: 7, seedCost: 20, basePrice: 60, isMulti: true, regrow: 5, yield: 1 },
@@ -36,12 +41,22 @@ const crops = [
     { name: "Ancient Fruit", type: "fruit", img: "https://stardewvalleywiki.com/mediawiki/images/0/01/Ancient_Fruit.png", growthDays: 28, seedCost: 0, basePrice: 550, isMulti: true, regrow: 7, yield: 1 },
     { name: "Bok Choy", type: "veg", img: "https://stardewvalleywiki.com/mediawiki/images/4/40/Bok_Choy.png", growthDays: 4, seedCost: 50, basePrice: 80, isMulti: false, regrow: 0, yield: 1 },
     { name: "Sweet Gem Berry", type: "fruit", img: "https://stardewvalleywiki.com/mediawiki/images/8/88/Sweet_Gem_Berry.png", growthDays: 24, seedCost: 1000, basePrice: 3000, isMulti: false, regrow: 0, yield: 1, noProcess: true },
-
+    { name: "Amaranth", type: "veg", img: "https://stardewvalleywiki.com/mediawiki/images/f/f6/Amaranth.png", growthDays: 7, seedCost: 70, basePrice: 150, isMulti: false, regrow: 0, yield: 1 },
+    { name: "Fairy Rose", type: "flower", img: "https://stardewvalleywiki.com/mediawiki/images/d/d9/Fairy_Rose.png", growthDays: 12, seedCost: 200, basePrice: 290, isMulti: false, regrow: 0, yield: 1 },
+    { name: "Artichoke", type: "veg", img: "https://stardewvalleywiki.com/mediawiki/images/d/d2/Artichoke.png", growthDays: 8, seedCost: 30, basePrice: 160, isMulti: false, regrow: 0, yield: 1 },
+    { name: "Beet", type: "veg", img: "https://stardewvalleywiki.com/mediawiki/images/a/a4/Beet.png", growthDays: 6, seedCost: 20, basePrice: 100, isMulti: false, regrow: 0, yield: 1 },
+  
     // --- 薑島與特殊 (Ginger Island / Desert) ---
     { name: "Pineapple", type: "fruit", img: "https://stardewvalleywiki.com/mediawiki/images/f/f2/Pineapple.png", growthDays: 14, seedCost: 0, basePrice: 300, isMulti: true, regrow: 7, yield: 1 },
     { name: "Taro Root", type: "veg", img: "https://stardewvalleywiki.com/mediawiki/images/0/01/Taro_Root.png", growthDays: 7, seedCost: 20, basePrice: 100, isMulti: false, regrow: 0, yield: 1 },
     { name: "Cactus Fruit", type: "fruit", img: "https://stardewvalleywiki.com/mediawiki/images/3/32/Cactus_Fruit.png", growthDays: 12, seedCost: 0, basePrice: 75, isMulti: true, regrow: 3, yield: 1 },
 
+    // --- 補全冬季/野外採集可加工項 ---
+    { name: "Crystal Fruit", type: "fruit", img: "https://stardewvalleywiki.com/mediawiki/images/1/16/Crystal_Fruit.png", growthDays: 7, seedCost: 0, basePrice: 150, isMulti: false, regrow: 0, yield: 1 },
+    { name: "Wild Plum", type: "fruit", img: "https://stardewvalleywiki.com/mediawiki/images/3/3b/Wild_Plum.png", growthDays: 7, seedCost: 0, basePrice: 80, isMulti: false, regrow: 0, yield: 1 },
+    { name: "Blackberry", type: "fruit", img: "https://stardewvalleywiki.com/mediawiki/images/2/25/Blackberry.png", growthDays: 7, seedCost: 0, basePrice: 20, isMulti: false, regrow: 0, yield: 1 },
+    { name: "Spice Berry", type: "fruit", img: "https://stardewvalleywiki.com/mediawiki/images/c/c6/Spice_Berry.png", growthDays: 7, seedCost: 0, basePrice: 80, isMulti: false, regrow: 0, yield: 1 },
+   
     // --- 1.6 新作物 (New in 1.6) ---
     { name: "Carrot", type: "veg", img: "https://stardewvalleywiki.com/mediawiki/images/c/c3/Carrot.png", growthDays: 3, seedCost: 0, basePrice: 35, isMulti: false, regrow: 0, yield: 1 },
     { name: "Summer Squash", type: "veg", img: "https://stardewvalleywiki.com/mediawiki/images/4/43/Summer_Squash.png", growthDays: 6, seedCost: 0, basePrice: 45, isMulti: true, regrow: 3, yield: 1 },
@@ -74,12 +89,27 @@ function calculateData() {
 
         if (c.noProcess) { jarPrice = 0; kegPrice = 0; dehydPrice = 0; }
 
+                // --- 加工時間邏輯 (關鍵修正) ---
+        let jarTime = 2.8; // 罐頭瓶統一約 2.8 天 (4000 min)
+        let kegTime = c.type === 'fruit' ? 7 : 4; // 預設：酒 7 天 / 果汁 4 天
+        
+        // 根據 Wiki 設定特殊加工時間 (以天為單位)
+        if (c.name === "Hops") kegTime = 1.4;        // 淡啤酒只需 1.4 天
+        if (c.name === "Wheat") kegTime = 1.1;       // 啤酒只需 1.1 天
+        if (c.name === "Coffee Bean") kegTime = 0.08; // 咖啡只需 2 小時 (0.08 天)
+        if (c.name === "Tea Leaves") kegTime = 0.125; // 綠茶只需 3 小時 (0.125 天)
+        if (c.name === "Unmilled Rice") kegTime = 0.4; // 醋只需 10 小時 (0.4 天)
+
         return {
             ...c,
             base_price: c.basePrice,
             jar_price: jarPrice, jar_net: jarPrice ? jarPrice - seedCost : 0, jar_daily: jarPrice ? (jarPrice - seedCost) / (effectiveGrowth + 2.8) : 0,
             keg_price: kegPrice, keg_net: kegPrice ? kegPrice - seedCost : 0, keg_daily: kegPrice ? (kegPrice - seedCost) / (effectiveGrowth + 7) : 0,
-            dehyd_price: c.type === 'fruit' ? dehydPrice : 0, dehyd_net: c.type === 'fruit' ? dehydPrice - seedCost : 0, dehyd_daily: c.type === 'fruit' ? (dehydPrice - seedCost) / (effectiveGrowth + 0.2) : 0
+            dehyd_price: c.type === 'fruit' ? dehydPrice : 0, dehyd_net: c.type === 'fruit' ? dehydPrice - seedCost : 0, dehyd_daily: c.type === 'fruit' ? (dehydPrice - seedCost) / (effectiveGrowth + 0.2) : 
+        };
+    });
+}
+
         };
     });
 }
