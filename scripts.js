@@ -73,52 +73,67 @@ const crops = [
     { name: "Cherry", type: "fruit", img: "https://stardewvalleywiki.com/mediawiki/images/2/20/Cherry.png", growthDays: 28, seedCost: 0, basePrice: 80, isMulti: true, regrow: 1, yield: 1 },
     { name: "Apricot", type: "fruit", img: "https://stardewvalleywiki.com/mediawiki/images/f/fc/Apricot.png", growthDays: 28, seedCost: 0, basePrice: 50, isMulti: true, regrow: 1, yield: 1 }
 ];
+
+const mushrooms = [
+    { name: "Common Mushroom", type: "veg", img: "https://stardewvalleywiki.com/mediawiki/images/1/11/Common_Mushroom.png", growthDays: 4, seedCost: 0, basePrice: 40, isMulti: false, regrow: 0, yield: 1 },
+    { name: "Red Mushroom", type: "veg", img: "https://stardewvalleywiki.com/mediawiki/images/d/da/Red_Mushroom.png", growthDays: 4, seedCost: 0, basePrice: 75, isMulti: false, regrow: 0, yield: 1 },
+    { name: "Morel", type: "veg", img: "https://stardewvalleywiki.com/mediawiki/images/b/b1/Morel.png", growthDays: 4, seedCost: 0, basePrice: 150, isMulti: false, regrow: 0, yield: 1 },
+    { name: "Chanterelle", type: "veg", img: "https://stardewvalleywiki.com/mediawiki/images/1/1d/Chanterelle.png", growthDays: 4, seedCost: 0, basePrice: 160, isMulti: false, regrow: 0, yield: 1 },
+    { name: "Purple Mushroom", type: "veg", img: "https://stardewvalleywiki.com/mediawiki/images/4/4b/Purple_Mushroom.png", growthDays: 4, seedCost: 0, basePrice: 250, isMulti: false, regrow: 0, yield: 1 },
+    { name: "Magma Cap", type: "veg", img: "https://stardewvalleywiki.com/mediawiki/images/6/6d/Magma_Cap.png", growthDays: 4, seedCost: 0, basePrice: 400, isMulti: false, regrow: 0, yield: 1 }
+];
+
+// 合併到現有的 crops 陣列
+// const allItems = [...crops, ...mushrooms];
+
 let isArtisan = false;
 
 function calculateData() {
     const artisanMult = isArtisan ? 1.4 : 1;
-    return crops.map(c => {
+    // 使用整合後的 allItems
+    const allItems = [...crops, ...mushrooms];
+    
+    return allItems.map(c => {
         const seedCost = c.isMulti ? 0 : c.seedCost;
-        // 修正：計算生產效率，如果是連作作物則看回長天數
         const effectiveGrowth = (c.isMulti ? c.regrow : c.growthDays) / c.yield;
+
+        // 蘑菇判斷邏輯
+        const isMushroom = ["Common Mushroom", "Red Mushroom", "Morel", "Chanterelle", "Purple Mushroom", "Magma Cap"].includes(c.name);
+        const canDehydrate = c.type === 'fruit' || isMushroom;
 
         // --- 1. 加工售價計算 ---
         let jarPrice = (c.basePrice * 2 + 50) * artisanMult;
         let kegPrice = (c.type === 'fruit' ? c.basePrice * 3 : c.basePrice * 2.25) * artisanMult;
         if (c.kegOverride) kegPrice = c.kegOverride * artisanMult;
         
-        // 脫水機：5個水果變1個乾，售價 = (5 * base * 1.5 + 25) / 5 (單顆貢獻)
-        let dehydPrice = ((7.5 * c.basePrice + 25) / 5) * artisanMult;
+        // 修正：僅宣告一次變數，並判斷 canDehydrate
+        let dehydPrice = canDehydrate ? (((7.5 * c.basePrice + 25) / 5) * artisanMult) : 0;
         if (c.dehydOverride) dehydPrice = c.dehydOverride * artisanMult;
 
         if (c.noProcess) { jarPrice = 0; kegPrice = 0; dehydPrice = 0; }
 
-        // --- 2. 加工時間邏輯 (修正點：確保應用於計算) ---
+        // --- 2. 加工時間邏輯 (維持你之前的修正) ---
         let jarTime = 2.8; 
         let kegTime = c.type === 'fruit' ? 7 : 4; 
-        
         if (c.name === "Hops") kegTime = 1.4;        
         if (c.name === "Wheat") kegTime = 1.1;       
         if (c.name === "Coffee Bean") kegTime = 0.08; 
         if (c.name === "Tea Leaves") kegTime = 0.125; 
         if (c.name === "Unmilled Rice") kegTime = 0.4; 
 
-        // --- 3. 回傳物件 (修正語法錯誤) ---
         return {
             ...c,
             base_price: c.basePrice,
-            // 醃製桶
+            can_dehydrate: canDehydrate, // 傳給渲染函數使用
             jar_price: jarPrice, 
             jar_net: jarPrice ? jarPrice - seedCost : 0, 
             jar_daily: jarPrice ? (jarPrice - seedCost) / (effectiveGrowth + jarTime) : 0,
-            // 釀酒桶 (修正分母：將 7 改為 kegTime)
             keg_price: kegPrice, 
             keg_net: kegPrice ? kegPrice - seedCost : 0, 
             keg_daily: kegPrice ? (kegPrice - seedCost) / (effectiveGrowth + kegTime) : 0,
-            // 脫水機
-            dehyd_price: c.type === 'fruit' ? dehydPrice : 0, 
-            dehyd_net: c.type === 'fruit' ? dehydPrice - seedCost : 0, 
-            dehyd_daily: c.type === 'fruit' ? (dehydPrice - seedCost) / (effectiveGrowth + 0.2) : 0 // 修正此處邏輯
+            dehyd_price: dehydPrice, 
+            dehyd_net: canDehydrate ? dehydPrice - seedCost : 0, 
+            dehyd_daily: canDehydrate ? (dehydPrice - seedCost) / (effectiveGrowth + 0.2) : 0
         };
     });
 }
@@ -152,9 +167,9 @@ function renderTable(data) {
             <td class="cell-keg ${checkActive('keg_price')}">${Math.round(row.keg_price)}</td>
             <td class="cell-keg ${checkActive('keg_net')}">${Math.round(row.keg_net)}</td>
             <td class="cell-keg ${checkActive('keg_daily')}">${row.keg_daily.toFixed(1)}</td>
-            <td class="cell-dehyd ${checkActive('dehyd_price')}">${row.type === 'fruit' ? Math.round(row.dehyd_price) : '-'}</td>
-            <td class="cell-dehyd ${checkActive('dehyd_net')}">${row.type === 'fruit' ? Math.round(row.dehyd_net) : '-'}</td>
-            <td class="cell-dehyd ${checkActive('dehyd_daily')}">${row.type === 'fruit' ? row.dehyd_daily.toFixed(1) : '-'}</td>
+            <td class="cell-dehyd ${checkActive('dehyd_price')}">${row.can_dehydrate ? Math.round(row.dehyd_price) : '-'}</td>
+            <td class="cell-dehyd ${checkActive('dehyd_net')}">${row.can_dehydrate ? Math.round(row.dehyd_net) : '-'}</td>
+            <td class="cell-dehyd ${checkActive('dehyd_daily')}">${row.can_dehydrate ? row.dehyd_daily.toFixed(1) : '-'}</td>
         </tr>
         `;
     }).join('');
